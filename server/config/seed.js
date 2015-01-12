@@ -7,6 +7,7 @@
 
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
+var Product = require('../api/product/product.model');
 
 Thing.find({}).remove(function() {
   Thing.create({
@@ -29,6 +30,32 @@ Thing.find({}).remove(function() {
     info : 'Easily deploy your app to Heroku or Openshift with the heroku and openshift subgenerators'
   });
 });
+
+Product.find({}).remove(function() {
+  Product.create({
+    name: 'product 1',
+    price: 19.99,
+    description: 'Great product',
+    category: 'Electronic',
+    review: [],
+    qty: 12
+  }, {
+    name: 'product 2',
+    price: 19.99,
+    description: 'Great product',
+    category: 'Electronic',
+    review: [],
+    qty: 12
+  }, {
+    name: 'product 3',
+    price: 19.99,
+    description: 'Great product',
+    category: 'Electronic',
+    review: [],
+    qty: 12
+  });
+});
+
 
 User.find({}).remove(function() {
   User.create({
