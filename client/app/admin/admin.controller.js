@@ -24,7 +24,7 @@ angular.module('stackStoreApp')
       $scope.products.forEach(function(prod,i){
         if(prod === product){
           $scope.products.splice(i,1);
-        }
+        };
       })
     };
 
