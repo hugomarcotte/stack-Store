@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 var OrderSchema = new Schema({
   _user: { type: Schema.Types.ObjectId, ref: 'User', required: true}, // Link to user
   _products: [{ productID:{ type: Schema.Types.ObjectId, ref: 'Product' }, cartQty: Number}],
-  completed: { type: Boolean, default: false} // True means order completed, false = cart
+  completed: { type: Boolean, default: false}, // True means order completed, false = cart
   creationDate: {type:Date, default: Date.now() },
   completionDate: Date
 });
