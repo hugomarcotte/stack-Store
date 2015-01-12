@@ -38,21 +38,24 @@ Product.find({}).remove(function() {
     description: 'Great product',
     category: 'Electronic',
     review: [],
-    qty: 12
+    qty: 12,
+    image: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"
   }, {
     name: 'product 2',
     price: 19.99,
     description: 'Great product',
     category: 'Electronic',
     review: [],
-    qty: 12
+    qty: 12,
+     image: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"
   }, {
     name: 'product 3',
     price: 19.99,
     description: 'Great product',
     category: 'Electronic',
     review: [],
-    qty: 12
+    qty: 12,
+     image: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"
   });
 });
 

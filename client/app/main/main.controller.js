@@ -4,8 +4,8 @@ angular.module('stackStoreApp')
   .controller('MainCtrl', function ($scope, $http) {
     $scope.awesomeThings = [];
 
-    $http.get('/api/products').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
+    $http.get('/api/products').success(function(products) {
+      $scope.products = products;
     });
 
     $scope.addThing = function() {
