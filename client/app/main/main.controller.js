@@ -8,6 +8,10 @@ angular.module('stackStoreApp')
       $scope.products = products;
     });
 
+    $http.get('/api/categories').success(function(categories){
+      $scope.categories = categories;
+    });
+
     $scope.addThing = function() {
       if($scope.newThing === '') {
         return;
@@ -21,8 +25,21 @@ angular.module('stackStoreApp')
     };
 
     $scope.search = function() {
-      $http.get('/api/products/search/'+$scope.searchTerm).success(function(products) {
-        console.log(products);
+      if($scope.pCategory){
+        $http.get('/api/products/search/'+$scope.searchTerm+'/'+$scope.pCategory).success(function(products) {
+          $scope.products = products;
+        })
+      }
+      else{
+        $http.get('/api/products/search/'+$scope.searchTerm).success(function(products) {
+          $scope.products = products;
+        })
+      }
+    };
+
+    $scope.categorySearch = function(cat) {
+      $http.get('/api/products/category/'+cat).success(function(products) {
+        $scope.pCategory = cat;
         $scope.products = products;
       })
     };

@@ -10,7 +10,6 @@ exports.index = function(req, res) {
     return res.json(200, products);
   });
 };
-
 // Get a single product
 exports.show = function(req, res) {
   Product.findById(req.params.id, function (err, product) {
@@ -19,7 +18,7 @@ exports.show = function(req, res) {
     return res.json(product);
   });
 };
-
+///Searches for products by name
 exports.searchTerm = function(req, res) {
   var name = req.params.searchTerm;
   Product.find({name: {$regex: name, $options:"$i"}}, function (err, products) {
@@ -27,6 +26,23 @@ exports.searchTerm = function(req, res) {
     return res.json(200, products);
   })
 };
+/// Searches for products by category
+exports.searchCat = function(req, res) {
+  var cat = req.params.searchCat;
+  Product.find({category: {$regex: cat, $options:"$i"}}, function (err, products) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, products);
+  })
+};
+//// Search for products within a category
+exports.searchByCat = function(req, res){
+  var name = req.params.searchTerm;
+  var cat = req.params.searchCat;
+  Product.find({name: {$regex: name, $options:"$i"}, category: cat}, function (err, products) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, products);
+  })
+}
 
 // Creates a new product in the DB.
 exports.create = function(req, res) {
