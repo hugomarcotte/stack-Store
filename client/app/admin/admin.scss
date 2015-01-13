@@ -5,3 +5,14 @@
 .list-group {
   margin-top:20px;
 }
+
+.unstyle {
+	list-style-type: none;
+	padding-left: 0;
+	width: auto;
+}
+
+.update-list > div {
+	margin: 5px 0px;
+}
+

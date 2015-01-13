@@ -21,9 +21,13 @@ angular.module('stackStoreApp')
       });
     };
 
-    $http.get('/api/products').success(function(products){
+    $scope.populateProducts = function(){
+      editProduct.getProducts(function(products) {
       $scope.products = products;
-    });
+      })
+    };
+
+    $scope.populateProducts();
 
     $scope.deleteProduct = function(product) {
       // console.log('clicked')
@@ -40,18 +44,10 @@ angular.module('stackStoreApp')
       $scope.categories = categories;
     })
 
-    $scope.createNewProduct = function(){
-      $http.post('/api/products',
-        { name: $scope.newProduct.name,
-          description: $scope.newProduct.description,
-          category: $scope.newProduct.category
-        })
-        .success(function(newProduct){
-          console.log(newProduct);
-          $scope.newProduct={category: []};
-          $scope.addProduct = false;
-          $scope.products.push(newProduct)
-      })
+    $scope.createNewProduct = function(product){
+      editProduct.addProduct(product);
+      $scope.newProduct = {category: []};
+      $scope.populateProducts();
     }
 
     $scope.addCategory = function() {
