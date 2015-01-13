@@ -20,6 +20,14 @@ exports.show = function(req, res) {
   });
 };
 
+exports.searchTerm = function(req, res) {
+  var name = req.params.searchTerm;
+  Product.find({name: {$regex: name, $options:"$i"}}, function (err, products) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, products);
+  })
+};
+
 // Creates a new product in the DB.
 exports.create = function(req, res) {
   Product.create(req.body, function(err, product) {

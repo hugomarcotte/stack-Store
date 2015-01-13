@@ -19,4 +19,12 @@ angular.module('stackStoreApp')
     $scope.deleteThing = function(thing) {
       $http.delete('/api/things/' + thing._id);
     };
+
+    $scope.search = function() {
+      $http.get('/api/products/search/'+$scope.searchTerm).success(function(products) {
+        console.log(products);
+        $scope.products = products;
+      })
+    };
+
   });
