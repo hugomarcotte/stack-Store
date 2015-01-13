@@ -11,7 +11,7 @@ var ProductSchema = new Schema({
 	review: [],
 	qty: Number,
 	active: {type: Boolean, default: true},
-	image: String
+	image: {type: String, default: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"}
 });
 
 module.exports = mongoose.model('Product', ProductSchema);
