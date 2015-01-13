@@ -5,6 +5,9 @@ angular.module('stackStoreApp')
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
+    
+    $scope.newProduct={};
+
 
     $scope.deleteUser = function(user) {
       User.remove({ id: user._id });
@@ -28,6 +31,22 @@ angular.module('stackStoreApp')
       })
     };
 
+    $http.get('/api/categories').success(function(categories){
+      $scope.categories = categories;
+    })
 
+    $scope.createNewProduct = function(){
+      $http.post('/api/products',
+        { name: $scope.newProduct.name, 
+          description: $scope.newProduct.description,
+          category: $scope.newProduct.category
+        })
+        .success(function(newProduct){
+          $scope.newProduct={};
+          $scope.addProduct = false;
+          $scope.products.push(newProduct)
+      })
+      
+    }
     
   });
