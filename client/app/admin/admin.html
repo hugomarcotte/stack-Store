@@ -2,9 +2,6 @@
 
 <div class="container">
   <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
-  <span><button type='submit' class='btn btn-primary'>Test</button>
-  	<button class='btn btn-primary'>Button 2</button>
-  </span>
   <ul class="list-group">
     <li class="list-group-item" ng-repeat="user in users">
         <strong>{{user.name}}</strong><br>
@@ -13,12 +10,34 @@
     </li>
   </ul>
 
+<button class='btn btn-primary' ng-click='addProduct = true' >Add Product</button>
+	<div ng-show='addProduct'><h3>Add New Product</h3>
+		<form name = 'productForm' ng-submit='createNewProduct()'>
+			<input type = 'text' placeholder = 'Product Name' ng-model='newProduct.name'>
+			<input type = 'text' placeholder = 'Product Description' ng-model='newProduct.description'>
+			<!-- should category be from a dropdown or user created every time? -->
+			<select ng-model='newProduct.category'>
+				<option ng-repeat ='category in categories' value='{{category._id}}'>{{category.name}}
+				</option>
+			</select>
+			
+			<div>
+				<button class='btn btn-primary' type='submit'>Submit Product</button>
+				<button class='btn btn-danger' type ='button' ng-click='addProduct=false'>Cancel</button>
+			</div>
+			<h4>Validation: {{productForm}}</h4>
+			<h4>{{product}}</h4>
+		</form>
+		
+	</div>
 
-  <ul class="list-group">
-    <li class="list-group-item" ng-repeat="product in products ">
-        <strong>{{product.name}}</strong><br>
-        <span class="text-muted">{{product.description}} , {{product._id}}</span>
-        <a ng-click="deleteProduct(product)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
-    </li>
-  </ul>
+	<div ng-hide='addProduct'>
+	  <ul class="list-group">
+	    <li class="list-group-item" ng-repeat="product in products ">
+	        <strong>{{product.name}}</strong><br>
+	        <span class="text-muted">{{product.description}} , {{product._id}}</span>
+	        <a ng-click="deleteProduct(product)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+	    </li>
+	  </ul>
+  	</div>
 </div>
