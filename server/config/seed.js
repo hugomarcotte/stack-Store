@@ -14,7 +14,7 @@ Product.find({}).remove(function() {
     name: 'product 1',
     price: 19.99,
     description: 'Great product',
-    category: 'Electronic',
+    category: [],
     review: [],
     qty: 12,
     image: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"
@@ -22,7 +22,7 @@ Product.find({}).remove(function() {
     name: 'product 2',
     price: 19.99,
     description: 'Great product',
-    category: 'Electronic',
+    category: [],
     review: [],
     qty: 12,
      image: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"
@@ -30,10 +30,10 @@ Product.find({}).remove(function() {
     name: 'product 3',
     price: 19.99,
     description: 'Great product',
-    category: 'Electronic',
+    category: [],
     review: [],
     qty: 12,
-     image: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"
+    image: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"
   });
 });
 
@@ -58,7 +58,7 @@ User.find({}).remove(function() {
 
 Category.find({}).remove(function(){
   Category.create(
-    {name: 'Electronics'}, 
+    {name: 'Electronics'},
     {name: 'Furniture'},
     {name: 'Jewelry'},
     function(){
@@ -66,4 +66,3 @@ Category.find({}).remove(function(){
     }
   )
 })
-

@@ -7,7 +7,7 @@ var ProductSchema = new Schema({
 	name: String,
 	price: Number,
 	description: String,
-	category: String,
+	category: [],
 	review: [],
 	qty: Number,
 	active: {type: Boolean, default: true},

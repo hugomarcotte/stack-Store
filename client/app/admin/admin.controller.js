@@ -5,8 +5,8 @@ angular.module('stackStoreApp')
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
-    
-    $scope.newProduct={};
+
+    $scope.newProduct={category: []};
 
 
     $scope.deleteUser = function(user) {
@@ -37,16 +37,26 @@ angular.module('stackStoreApp')
 
     $scope.createNewProduct = function(){
       $http.post('/api/products',
-        { name: $scope.newProduct.name, 
+        { name: $scope.newProduct.name,
           description: $scope.newProduct.description,
           category: $scope.newProduct.category
         })
         .success(function(newProduct){
-          $scope.newProduct={};
+          console.log(newProduct);
+          $scope.newProduct={category: []};
           $scope.addProduct = false;
           $scope.products.push(newProduct)
       })
-      
+
     }
-    
+
+
+    $scope.addCategory = function() {
+      if($scope.selectedCategory) {
+        if($scope.newProduct.category.indexOf($scope.selectedCategory) === -1) {
+          $scope.newProduct.category.push($scope.selectedCategory);
+        }
+      }
+    }
+
   });
