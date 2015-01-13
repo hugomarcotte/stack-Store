@@ -53,19 +53,31 @@
         </form>
       </div>  
       <!------- End Add Product View ---->
+
+
       <!---- Update Product View ------>
-      <div ng-show="updateProduct"><h1>Update Product {{testing}} </h1>
+      <div ng-show="updateProduct"><h3>Update Product {{testing}} </h3>
+
+
+        <button ng-click='updateProduct=!updateProduct' type='button' class='btn btn-danger'>Cancel</button>
+
 
 
 
       </div>
 
-
-
       <div ng-hide="updateProduct">
         <ul class="list-group">
           <li  class="list-group-item" ng-repeat="product in products" >
-            <adminproduct product='product'></adminproduct>
+            <span>
+              <strong>{{product.name}}</strong>
+              <a ng-click="$parent.updateProduct=true"><span class="glyphicon glyphicon-wrench pull-right"></a>
+            </span>
+            <br>
+            <span class="text-muted">{{product.description}} , {{product._id}}</span>
+            <a ng-click="deleteProduct(product)" class="trash">
+              <span class="glyphicon glyphicon-trash pull-right"> </span>
+            </a>
           </li>
         </ul>
       </div>

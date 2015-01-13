@@ -23,6 +23,7 @@ angular.module('stackStoreApp')
     });
 
     $scope.deleteProduct = function(product) {
+      console.log('clicked')
       $http.delete('/api/products/'+product._id);
       $scope.products.forEach(function(prod,i){
         if(prod === product){
