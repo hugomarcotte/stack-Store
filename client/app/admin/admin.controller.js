@@ -49,11 +49,7 @@ angular.module('stackStoreApp')
       })
 
     }
-
-
     $scope.addCategory = function() {
-      console.log($scope)
-      console.log('log1',$scope.selectedCategory)
       if($scope.selectedCategory) {
         if($scope.newProduct.category.indexOf($scope.selectedCategory) === -1) {
           $scope.newProduct.category.push($scope.selectedCategory);
@@ -61,4 +57,30 @@ angular.module('stackStoreApp')
       }
     }
 
-  });
+    $scope.removeCategory = function(category){
+      var newProduct = $scope.newProduct.category;
+      newProduct.splice(newProduct.indexOf(category),1)
+    }
+
+  $scope.userForms = {};
+
+  $scope.showUserForm = function(user) {
+    $scope.userForms[user._id + 'UserForm'] = true;
+  }
+
+  }).directive('adminProduct', function () {
+      return {
+        controller: 'app/admin/admin.controller.js',
+        templateUrl: 'app/adminProduct/adminProduct.html',
+        restrict: 'EA',
+        scope: {
+          product: '='
+        }
+       
+      };
+    });
+
+
+
+
+

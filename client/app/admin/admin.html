@@ -14,6 +14,10 @@
     </tab>
     <tab heading="Products">
       <button class='btn btn-primary' ng-click='addProduct = true' >Add Product</button>
+
+
+       <!------- Add Product View ---->
+      
       <div ng-show='addProduct'><h3>Add New Product</h3>
         <form name = 'productForm' ng-submit='createNewProduct()'>
           <div>
@@ -22,21 +26,20 @@
           <div>
             <input type = 'text' placeholder = 'Product Description' ng-model='newProduct.description'>
           </div>
+          
           <div>
-            <span>{{newProduct.category.join(', ')}}</span>
-          </div>
-          <div>
-            
             <select ng-model='$parent.$parent.selectedCategory'>
               <option ng-repeat='category in categories' value='{{category.name}}'>{{category.name}}
               </option>
             </select>
-            <button class='btn btn-primary' type='button' ng-click="addCategory()">+</button>
+            <button class='btn btn-primary btn-xs' type='button' ng-click="addCategory()">+</button>
           </div>
           <div>
-            <ul>
+            <ul>Associated Categories
               <li ng-repeat='category in newProduct.category'>{{category}}
+                <button type='button' class='btn btn-danger btn-xs' ng-click='removeCategory(category)'>x</button>
               </li>
+
             </ul>
           </div>
 
@@ -48,14 +51,21 @@
           <h4>Validation: {{productForm}}</h4>
           <h4>{{newProduct}}</h4>
         </form>
+      </div>  
+      <!------- End Add Product View ---->
+      <!---- Update Product View ------>
+      <div ng-show="updateProduct"><h1>Update Product {{testing}} </h1>
+
+
+
       </div>
 
-      <div>
+
+
+      <div ng-hide="updateProduct">
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="product in products ">
-            <strong>{{product.name}}</strong><br>
-            <span class="text-muted">{{product.description}} , {{product._id}}</span>
-            <a ng-click="deleteProduct(product)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+          <li  class="list-group-item" ng-repeat="product in products" >
+            <adminProduct></adminProduct>
           </li>
         </ul>
       </div>
