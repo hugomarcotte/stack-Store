@@ -26,19 +26,26 @@
             <span>{{newProduct.category.join(', ')}}</span>
           </div>
           <div>
-            <!-- should category be from a dropdown or user created every time? -->
-            <select ng-model='selectedCategory'>
-              <option ng-repeat ='category in categories' value='{{category.name}}'>{{category.name}}
+            
+            <select ng-model='$parent.$parent.selectedCategory'>
+              <option ng-repeat='category in categories' value='{{category.name}}'>{{category.name}}
               </option>
             </select>
             <button class='btn btn-primary' type='button' ng-click="addCategory()">+</button>
           </div>
           <div>
+            <ul>
+              <li ng-repeat='category in newProduct.category'>{{category}}
+              </li>
+            </ul>
+          </div>
+
+
+          <div>
             <button class='btn btn-primary' type='submit'>Save</button>
             <button class='btn btn-danger' type ='button' ng-click='addProduct=false'>Cancel</button>
           </div>
           <h4>Validation: {{productForm}}</h4>
-          <h4>{{product}}</h4>
           <h4>{{newProduct}}</h4>
         </form>
       </div>

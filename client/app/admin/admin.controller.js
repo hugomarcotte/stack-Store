@@ -52,6 +52,8 @@ angular.module('stackStoreApp')
 
 
     $scope.addCategory = function() {
+      console.log($scope)
+      console.log('log1',$scope.selectedCategory)
       if($scope.selectedCategory) {
         if($scope.newProduct.category.indexOf($scope.selectedCategory) === -1) {
           $scope.newProduct.category.push($scope.selectedCategory);
