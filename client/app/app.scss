@@ -15,21 +15,6 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     padding: 0.2em 0;
 }
 
-.product-grid{
-	margin-top: 30px;
-}
-
-.product-image{
-	width: 20%;
-}
-
-#img-ctnr{
-	text-align: center;
-}
-
-#name-ctnr{
-	text-align: center;
-}
 
 
 
@@ -38,5 +23,6 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
 @import 'main/main.scss';
+@import 'product/product.scss';
 @import 'modal/modal.scss';
 // endinjector

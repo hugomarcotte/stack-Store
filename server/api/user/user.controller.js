@@ -34,7 +34,7 @@ exports.create = function (req, res, next) {
   });
 };
 
-/**
+/**s
  * Get a single user
  */
 exports.show = function (req, res, next) {
