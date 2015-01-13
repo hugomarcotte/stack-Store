@@ -14,7 +14,7 @@ Product.find({}).remove(function() {
     name: 'product 1',
     price: 19.99,
     description: 'Great product',
-    category: 'Electronic',
+    category: 'Electronics',
     review: [],
     qty: 12,
     image: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"
@@ -22,7 +22,7 @@ Product.find({}).remove(function() {
     name: 'product 2',
     price: 19.99,
     description: 'Great product',
-    category: 'Electronic',
+    category: 'Electronics',
     review: [],
     qty: 12,
      image: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"
@@ -30,7 +30,7 @@ Product.find({}).remove(function() {
     name: 'product 3',
     price: 19.99,
     description: 'Great product',
-    category: 'Electronic',
+    category: 'Furniture',
     review: [],
     qty: 12,
      image: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"
