@@ -1,10 +1,10 @@
 'use strict';
 
-describe('Directive: adminProduct', function () {
+describe('Directive: adminproduct', function () {
 
   // load the directive's module and view
   beforeEach(module('stackStoreApp'));
-  beforeEach(module('app/adminProduct/adminProduct.html'));
+  beforeEach(module('app/adminproduct/adminproduct.html'));
 
   var element, scope;
 
@@ -13,9 +13,9 @@ describe('Directive: adminProduct', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<admin-product></admin-product>');
+    element = angular.element('<adminproduct></adminproduct>');
     element = $compile(element)(scope);
     scope.$apply();
-    expect(element.text()).toBe('this is the adminProduct directive');
+    expect(element.text()).toBe('this is the adminproduct directive');
   }));
 });

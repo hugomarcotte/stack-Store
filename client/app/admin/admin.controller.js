@@ -68,19 +68,4 @@ angular.module('stackStoreApp')
     $scope.userForms[user._id + 'UserForm'] = true;
   }
 
-  }).directive('adminProduct', function () {
-      return {
-        controller: 'app/admin/admin.controller.js',
-        templateUrl: 'app/adminProduct/adminProduct.html',
-        restrict: 'EA',
-        scope: {
-          product: '='
-        }
-       
-      };
-    });
-
-
-
-
-
+  })
