@@ -34,7 +34,7 @@
             <button class='btn btn-primary' type='button' ng-click="addCategory()">+</button>
           </div>
           <div>
-            <button class='btn btn-primary' type='submit'>Submit Product</button>
+            <button class='btn btn-primary' type='submit'>Save</button>
             <button class='btn btn-danger' type ='button' ng-click='addProduct=false'>Cancel</button>
           </div>
           <h4>Validation: {{productForm}}</h4>
@@ -43,7 +43,7 @@
         </form>
       </div>
 
-      <div ng-hide='addProduct'>
+      <div>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="product in products ">
             <strong>{{product.name}}</strong><br>
