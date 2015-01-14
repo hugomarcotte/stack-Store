@@ -1,22 +1,24 @@
 'use strict';
 
 angular.module('stackStoreApp')
-.factory('order',function (Auth, User, $http) {
+.factory('order',function (Auth, User, $http, $cookieStore) {
   var orders= [];
   var currentOrder = {};
-  currentOrder._user = ""
+  //currentOrder._user = ""
 
   return {
     addItem : function(product){
       console.log('add item');
       if(Auth.isLoggedIn()){
-         console.log("initial properties")
-        console.log(currentOrder);
+         console.log("cart")
+         currentOrder = $cookieStore.get('cart') || {_user:""};
+     //   console.log($cookieStore.get('cart'));
         // console.log(orders);
         currentOrder._user = Auth.getCurrentUser()._id;
         ///check if user already has an active cart
       
         if(currentOrder._id){
+          //currentOrder = $cookieStore.get('cart')
           console.log("current Order true")
           currentOrder._products.push(product);
 
@@ -38,9 +40,12 @@ angular.module('stackStoreApp')
           
           $http.post('/api/orders/', currentOrder).success(function(newOrder){
             currentOrder = newOrder;
-
-            console.log('current order:');
-            console.log(currentOrder);
+            console.log("cookieStore put");
+            $cookieStore.put('cart', currentOrder);
+            console.log("cookie store get")
+            console.log($cookieStore.get('cart'))
+            // console.log('current order:');
+            // console.log(currentOrder);
           });      
         } 
       }
