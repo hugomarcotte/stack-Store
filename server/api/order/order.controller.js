@@ -19,6 +19,7 @@ exports.show = function(req, res) {
     return res.json(order);
   });
 };
+///get an active cart for the current user
 exports.userCurOrder = function(req, res){
   var user = req.params.userId
   Order.find({_user:user, completed: false}, function(err, order) {

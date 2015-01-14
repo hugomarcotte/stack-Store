@@ -6,11 +6,11 @@ angular.module('stackStoreApp')
       .state('cart', {
         url: '/cart',
         templateUrl: 'app/cart/cart.html',
-        controller: 'CartCtrl',
-        resolve: {
-        	orderPromise: function(order){
-        		return order.getCurrentOrder();
-        	}
-        }
+        controller: 'CartCtrl'
+        // resolve: {
+        // 	orderPromise: function(order){
+        // 		return order.getCurrentOrder();
+        // 	}
+        // }
       });
   });
