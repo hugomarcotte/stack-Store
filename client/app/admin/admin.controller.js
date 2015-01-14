@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User, editProduct) {
+  .controller('AdminCtrl', function ($scope, $http, Auth, User, Product) {
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
@@ -9,7 +9,7 @@ angular.module('stackStoreApp')
     $scope.newProduct={category: []};
 
     $scope.productUpdate = function(product) {
-      editProduct.updateProduct(product);
+      Product.updateProduct(product);
     }
 
     $scope.deleteUser = function(user) {
@@ -22,7 +22,7 @@ angular.module('stackStoreApp')
     };
 
     $scope.populateProducts = function(){
-      editProduct.getProducts(function(products) {
+      Product.getProducts(function(products) {
       $scope.products = products;
       })
     };
@@ -37,7 +37,7 @@ angular.module('stackStoreApp')
           $scope.products.splice(i,1);
         };
       })
-      editProduct.deleteProduct(product);
+      Product.deleteProduct(product);
     };
 
     $http.get('/api/categories').success(function(categories){
@@ -45,7 +45,7 @@ angular.module('stackStoreApp')
     })
 
     $scope.createNewProduct = function(product){
-      editProduct.addProduct(product);
+      Product.addProduct(product);
       $scope.newProduct = {category: []};
       $scope.populateProducts();
     }
