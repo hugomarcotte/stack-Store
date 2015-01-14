@@ -19,7 +19,14 @@ exports.show = function(req, res) {
     return res.json(order);
   });
 };
-
+exports.userCurOrder = function(req, res){
+  var user = req.params.userId
+  Order.find({_user:user, completed: false}, function(err, order) {
+    if(err) { return handleError(res, err); }
+    if(!order) { return res.send(404); }
+    return res.json(200, order);
+  })
+}
 // Creates a new order in the DB.
 exports.create = function(req, res) {
   Order.create(req.body, function(err, order) {
