@@ -37,14 +37,33 @@ exports.create = function(req, res) {
 };
 
 // Updates an existing order in the DB.
+// exports.update = function(req, res) {
+//   console.log("req.body")
+//   console.log(req.body)
+//   if(req.body._id) { delete req.body._id; }
+//   Order.findById(req.params.id, function (err, order) {
+//     if (err) { return handleError(res, err); }
+//     if(!order) { return res.send(404); }
+
+//     var updated = _.merge(order, req.body);
+//     updated.save(function (err) {
+//       if (err) { return handleError(res, err); }
+//       console.log(order)
+//       return res.json(200, order);
+//     });
+//   });
+// };
+
+// Updates an existing order in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
+  //if(req.body._id) { delete req.body._id; }
   Order.findById(req.params.id, function (err, order) {
     if (err) { return handleError(res, err); }
     if(!order) { return res.send(404); }
-    var updated = _.merge(order, req.body);
-    updated.save(function (err) {
+    order._products.push(req.body)
+    order.save(function (err) {
       if (err) { return handleError(res, err); }
+      console.log(order)
       return res.json(200, order);
     });
   });

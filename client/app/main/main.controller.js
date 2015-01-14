@@ -43,9 +43,11 @@ angular.module('stackStoreApp')
         $scope.products = products;
       })
     };
+
     $scope.addToCart = function(product){
+      console.log("add to cart");
       order.addItem(product)
-    }
+    };
 
   });
   

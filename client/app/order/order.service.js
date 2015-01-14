@@ -1,72 +1,74 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .factory('order',function (Auth, User, $http) {
-    var o = { 
-      orders:[],
-      currentOrder: {_products: []}
-    };
+.factory('order',function (Auth, User, $http) {
+  var orders= [];
+  var currentOrder = {};
+  currentOrder._user = ""
 
-    // var foo = function(callback){
-    //   var user
-    //   if (user = Auth.getCurrentUser()){
-    //     // $scope.user = user
-    //     console.log("foo")
-    //     callback();
-    //   }
-    // }
-    // foo(o.getCurrentOrder)
-
-    o.getAll = function(){
-      $http.get('/api/orders/').success(function(data){
-        angular.copy(data, o.orders)
-      });
-    };
-
-    o.addItem = function(product){
-     // console.log(product)
-      console.log(o.currentOrder)
-      o.currentOrder._products.push(product);
-      console.log(o.currentOrder);
+  return {
+    addItem : function(product){
+      console.log('add item');
       if(Auth.isLoggedIn()){
-        o.currentOrder._user = Auth.getCurrentUser()._id
+         console.log("initial properties")
+        console.log(currentOrder);
+        // console.log(orders);
+        currentOrder._user = Auth.getCurrentUser()._id;
         ///check if user already has an active cart
-        if(o.currentOrder._id){
-          //console.log(o.currentOrder)
-          $http.put('/api/orders/'+o.currentOrder._id, o.currentOrder).success(function(data){
-            angular.copy(data, o.currentOrder)
-          })
+      
+        if(currentOrder._id){
+          console.log("current Order true")
+          currentOrder._products.push(product);
+
+          console.log("before update");
+          console.log(currentOrder);
+
+          $http.put('/api/orders/'+currentOrder._id, product).success(function(updatedOrder){
+            //angular.copy(data, o.currentOrder);
+            console.log("After update");
+            console.log(updatedOrder);
+
+            currentOrder = updatedOrder;
+          });
         } 
         else
-          {
-            console.log("first time")
-            console.log(o.currentOrder)
-            $http.post('/api/orders/', o.currentOrder).success(function(data){
-              angular.copy(data, o.currentOrder);
-              console.log(o.currentOrder)
-              //console.log(data);
-          })      
+        {
+          currentOrder._products = [];
+          currentOrder._products.push(product);
+          
+          $http.post('/api/orders/', currentOrder).success(function(newOrder){
+            currentOrder = newOrder;
+
+            console.log('current order:');
+            console.log(currentOrder);
+          });      
         } 
       }
-    };
+    },
 
-    o.getCurrentOrder= function(){
+    getCurrentOrder: function(callback){
+
       var user = Auth.getCurrentUser();
       if(Auth.isLoggedIn()){
         var id= user._id
         // IF cart is empty
-       // console.log(o.currentOrder)
-        if(o.currentOrder._products.length === 0){
-          //console.log("no products ");
-          // Get Order where user = current user id and completed == false
-          $http.get('/api/orders/user/'+id).success(function(data){
-           //console.log(data);
-            if(data.length >0){
-              angular.copy(data[0], o.currentOrder)  
-            }
-          })
-        }
-      }
-    };  
-    return o;
-  });
+       // if(currentOrder._products){
+       //    // Get Order where user = current user id and completed == false
+       //    $http.get('/api/orders/user/'+id).success(function(data){
+       //     if(data.length >0){
+       //      currentOrder = data[0];
+       //      }
+       //    })
+       //  }
+       //  else{
+       //    currentOrder = currentOrder
+       //  }
+       $http.get('/api/orders/user/'+id).success(function(current){
+        currentOrder = current[0];
+        callback(currentOrder);
+      })
+     }
+     callback(currentOrder);
+   }
+ }
+});
