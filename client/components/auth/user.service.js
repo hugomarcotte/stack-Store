@@ -18,5 +18,7 @@ angular.module('stackStoreApp')
           id:'me'
         }
       }
-	  });
+	  }
+    
+    );
   });
