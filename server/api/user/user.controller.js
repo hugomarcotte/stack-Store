@@ -58,6 +58,16 @@ exports.destroy = function(req, res) {
   });
 };
 
+exports.updateUser = function(req,res,next){
+  var userId = req.params.id;
+  var updatedUser = req.body;
+  User.findOneAndUpdate({_id:userId},updatedUser,function(err,user){
+    if(err) return res.send(500, err);
+    return res.send(204);
+  })
+
+}
+
 /**
  * Change a users password
  */

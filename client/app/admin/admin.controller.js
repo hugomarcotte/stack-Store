@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User, Product) {
+  .controller('AdminCtrl', function ($scope, $http, Auth, User, Product, Role) {
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
@@ -20,7 +20,6 @@ angular.module('stackStoreApp')
     $scope.populateProducts = function(){
       $scope.products = Product.query();
     }
-    
     $scope.populateProducts();
 
     $scope.deleteProduct = function(product){
@@ -32,19 +31,24 @@ angular.module('stackStoreApp')
       })
     }
 
-    // $scope.populateRoles = function(){
-    //   User.getRoles(function(roles){
-    //     $scope.roles = roles;
-    //   })
-    // };
-
-    // $scope.populateRoles();
+    $scope.populateRoles = function(){
+      $scope.roles = Role.query()
+    };
+    $scope.populateRoles();
 
 
     $http.get('/api/categories').success(function(categories){
       $scope.categories = categories;
     })
 
+    $scope.userUpdate = function(user){
+      User.userUpdate( {id:user._id} ,user,function(){
+        $scope.users = User.query()
+        },function(err){
+          console.log('Error: ',err)
+        }
+      )
+    }
 
     $scope.deleteUser = function(user) {
       User.remove({ id: user._id });
@@ -66,11 +70,5 @@ angular.module('stackStoreApp')
       var newProduct = $scope.newProduct.category;
       newProduct.splice(newProduct.indexOf(category),1)
     }
-
-  $scope.userForms = {};
-
-  $scope.showUserForm = function(user) {
-    $scope.userForms[user._id + 'UserForm'] = true;
-  }
 
   })
