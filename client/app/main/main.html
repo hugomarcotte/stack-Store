@@ -7,6 +7,19 @@
   </div>
   <form class="navbar-form" role="search">
     <div class="form-group">
+          <span class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+              Categories
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation" ng-repeat="category in categories">
+                <a role="menuitem" tabindex="-1" ng-click="categorySearch(category.name)">
+                  {{category.name}}
+                </a>
+              </li>
+            </ul>
+          </span>
         <input type="text" class="form-control" placeholder="Search" ng-model="searchTerm">
     </div>
     <button type="submit" class="btn btn-default" ng-click="search()">Submit</button>
@@ -14,11 +27,12 @@
 </header>
 
 <div class="container">
+  <h1>{{pCategory}}</h1>
   <div class="row product-grid">
     <div class="col-lg-12">
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="product in products">
+      <ul class="nav nav-stacked product-display col-md-4 col-lg-4 col-sm-6" ng-repeat="product in products">
         <li>
-          <div id="img-ctnr"><a href="/{{product._id}}" tooltip="{{product.name}}">
+          <div id="img-ctnr"><a href="/product/{{product._id}}" tooltip="{{product.name}}">
             <img class="product-image" src="{{product.image}}"/></a>
           </div>
           <div id="name-ctnr">{{product.name}}
