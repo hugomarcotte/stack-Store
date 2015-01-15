@@ -37,12 +37,9 @@ angular.module('stackStoreApp')
       currentOrder = $cookieStore.get('cart') || [];
 
       currentOrder.forEach(function(item, index){
-        console.log(item.product._id);
-        console.log(product);
+     
         if(item.product._id === product.product._id) {
-          console.log("found");
           currentOrder.splice(index,1);
-          console.log(currentOrder);
         }
       });
 
