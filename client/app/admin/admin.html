@@ -5,33 +5,37 @@
     <tab heading="Users">
       <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
 
-      <div ng-show='updateUser'> {{userToUpdate}}
-          <form class="form" name="form" ng-submit="userUpdate(userToUpdate)" novalidate>
+      <div ng-show='updateUser'>
+          <form name="userForm" ng-submit="userUpdate(userToUpdate)" novalidate>
               <div class="form-group">
                   <label>Email</label>
                   <input type="email" value ='{{userToUpdate.email}}' ng-model ='userToUpdate.email' class="form-control" ng-model="user.email" required>
               </div>
 
               <div class="form-group">
-                  <label>Reset Password (set up validation)</label>
-                  <input type="password" name="password" class="form-control">
+                  <label>Reset Password</label>
+                  <input type="password" name="password" class="form-control" ng-model='userToUpdate.password'>
+                  
               </div>
 
               <div class="form-group">
-                  <label>Confirm New Password (set up validation)</label>
-                  <input type="password" name="password" class="form-control" ng-model="user.password" required>
+                  
+                  <label>Confirm New Password</label>
+                  <input type="password" name= 'confirm_password' class="form-control" ng-model="userToUpdate.confirmPassword" ui-validate="'$value==userToUpdate.password'" ui-validate-watch="'userToUpdate.password'" >
+                  <div ng-show='!userForm.$valid && !!userForm.$error.validator && !userForm.confirm_password.$pristine'><span style='color:red'>Passwords Don't Match</span>
+                  </div>
               </div>
+              
 
               <div class='form-group'>
                 <label>Permissions</label>
                 <select ng-model='userToUpdate.role'>
-                  <option ng-repeat='role in roles' >{{role.role}}
-                  </option>
+                  <option ng-repeat='role in roles' >{{role.role}}</option>
                 </select>
 
 
               </div>
-              <button  class='btn btn-primary' ng-click='updateUser=false'>Save</button>
+              <button  class='btn btn-primary' ng-click='updateUser=false' ng-disabled='!userForm.$valid'>Save</button>
               <button type='button' class='btn btn-danger' ng-click='updateUser=false'>Cancel</button>
 
               <!-- <div class="form-group has-error">

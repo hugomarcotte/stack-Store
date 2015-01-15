@@ -43,6 +43,7 @@ angular.module('stackStoreApp')
 
     $scope.userUpdate = function(user){
       User.userUpdate( {id:user._id} ,user,function(){
+        console.log(user)
         $scope.users = User.query()
         },function(err){
           console.log('Error: ',err)

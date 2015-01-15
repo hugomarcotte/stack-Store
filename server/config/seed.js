@@ -120,10 +120,10 @@ Category.find({}).remove(function(){
 
 Role.find({}).remove(function(){
   Role.create(
-    {role: 'Admin'},
-    {role: 'User'},
+    {role: 'admin'},
+    {role: 'user'},
     function(){
-      console.log('Populated Categories')
+      console.log('Populated Roles')
     }
   )
 })

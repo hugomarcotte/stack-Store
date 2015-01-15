@@ -39,7 +39,6 @@ exports.create = function (req, res, next) {
  */
 exports.show = function (req, res, next) {
   var userId = req.params.id;
-
   User.findById(userId, function (err, user) {
     if (err) return next(err);
     if (!user) return res.send(401);
@@ -58,12 +57,21 @@ exports.destroy = function(req, res) {
   });
 };
 
-exports.updateUser = function(req,res,next){
-  var userId = req.params.id;
+exports.updateUser = function(req,res,next){  //only works if admin, look in index.js
+  var userId = req.params.id;                 //this seems super secure
   var updatedUser = req.body;
-  User.findOneAndUpdate({_id:userId},updatedUser,function(err,user){
-    if(err) return res.send(500, err);
-    return res.send(204);
+  console.log('REQ BODY ',req.body)
+  User.findById(userId,function(err,user){
+    user.email = updatedUser.email;
+    user.role = updatedUser.role;
+    user.password = updatedUser.confirmPassword;
+    user.save(function(err){
+      if(err){
+        res.status(500).send();
+      } else {
+        res.status(200).send();
+      }
+    });
   })
 
 }
