@@ -1,1 +1,26 @@
 .trash { color:rgb(209, 91, 71); }
+.tab-content {
+  margin-top: 25px;
+}
+.list-group {
+  margin-top:20px;
+}
+
+.unstyle {
+	list-style-type: none;
+	padding-left: 0;
+	width: auto;
+}
+
+.update-list > div {
+	margin: 5px 0px;
+}
+
+.unavailable {
+	border-color: red;
+	border-size: 5px;
+}
+
+.list-group-item{
+	margin: 4px;
+}
