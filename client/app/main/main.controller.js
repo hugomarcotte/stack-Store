@@ -46,8 +46,7 @@ angular.module('stackStoreApp')
 
     $scope.addToCart = function(product){
       console.log("add to cart");
-      Cart.addItem(product)
+      Cart.addItem(product, 1)
     };
 
   });
-  

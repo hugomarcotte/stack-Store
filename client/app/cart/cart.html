@@ -10,20 +10,20 @@
 	  <!-- Table -->
 	  <table class="table">
 	  	<tr>
-	  		<td>#</td>
+				<td></td>
 	    	<td>Item</td>
 	    	<td>Price</td>
-	    	<td>Remove</td>
 	    	<td>Quantity</td>
 	    	<td>Cost</td>
+				<td>Remove</td>
 	  	</tr>
 	  	<tr ng-repeat="product in order">
-	  		<td>{{$index + 1}}</td>
-	  		<td>{{product.name}}</td>
-	  		<td>{{product.price}}</td>
-	  		<td></td>
-	  		<td></td>
-	  		<td></td>
+				<td><img class="product-image" src="{{product.product.image}}"></td>
+	  		<td>{{product.product.name}}</td>
+	  		<td>{{product.product.price}}</td>
+				<td><input type="number" class="form-control" value="{{product.qty}}"></td>
+	  		<td>{{product.qty * product.product.price}}</td>
+	  		<td><span class="glyphicon glyphicon-remove" ng-click="removeItem(product)"></span> </td>
 
 	  	</tr>
 	  </table>
