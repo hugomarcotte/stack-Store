@@ -4,28 +4,46 @@
 		<h1>My Cart</h1>
 	</div>
 	<br>
+	<form name="cart" ng-submit='cartUpdate()'>
 	<div class="panel panel-default">
-	  <!-- Default panel contents -->
-	  <div>{{order}}</div>
-	  <!-- Table -->
-	  <table class="table">
+	  <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
 	  	<tr>
-				<td></td>
+			<td></td>
 	    	<td>Item</td>
 	    	<td>Price</td>
 	    	<td>Quantity</td>
 	    	<td>Cost</td>
-				<td>Remove</td>
+	    	<td>Remove</td>
 	  	</tr>
-	  	<tr ng-repeat="product in order">
-				<td><img class="product-image" src="{{product.product.image}}"></td>
+	  	<tr ng-show="cartIsEmpty">
+	  		<td colspan="6">
+	  			Your cart is empty!
+	  		</td>
+	  	</tr>
+	  	<tr ng-repeat="product in cartOrder">
+			<td class="cart-img"><img class="product-image-thumb" src="{{product.product.image}}"></td>
 	  		<td>{{product.product.name}}</td>
-	  		<td>{{product.product.price}}</td>
-				<td><input type="number" class="form-control" value="{{product.qty}}"></td>
-	  		<td>{{product.qty * product.product.price}}</td>
-	  		<td><span class="glyphicon glyphicon-remove" ng-click="removeItem(product)"></span> </td>
+	  		<td> {{product.product.price | currency: "$ "}}</td>
+			<td class="cart-qty"><input type="number" class="form-control pull-right" min="1" ng-model="product.qty" ng-change="$parent.isSaved=false"></td>
+	  		<td>{{product.qty * product.product.price | currency: "$ "}}</td>
+	  		<td><span style="cursor: pointer;" class="glyphicon glyphicon-remove" ng-click="removeItem(product)"></span> </td>
 
 	  	</tr>
+	  	<tr>
+	  		<td colspan="4"></td>
+	  		<td><b>{{}}</b></td>
+	  		<td colspan="2"></td>
+	  	</tr>		  	
 	  </table>
+	
+	</div>
+	<div ng-show="isSaved">
+		Your Cart is saved.
+	</div>
+	<div class="button-group">
+  		<button type="submit" class="btn btn-primary">Save</button>
+  		<button type="button" class="btn btn-danger">Checkout</button>
+	</div>
+	</form>
 </div>
-</div>
+

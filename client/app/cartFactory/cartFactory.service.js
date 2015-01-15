@@ -8,6 +8,9 @@ angular.module('stackStoreApp')
   	getCart: function() {
   		return $cookieStore.get('cart');
   	},
+    updateCart: function(currentOrder){
+      $cookieStore.put('cart', currentOrder)
+    },
     addItem : function(product, qty){
 
       // pass quantity (product detail)
