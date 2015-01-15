@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User, Product, Role) {
+  .controller('AdminCtrl', function ($scope, $http, Auth, User, Product, Role,Category ) {
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
@@ -19,6 +19,7 @@ angular.module('stackStoreApp')
 
     $scope.populateProducts = function(){
       $scope.products = Product.query();
+      console.log($scope.products)
     }
     $scope.populateProducts();
 
@@ -36,10 +37,10 @@ angular.module('stackStoreApp')
     };
     $scope.populateRoles();
 
-
-    $http.get('/api/categories').success(function(categories){
-      $scope.categories = categories;
-    })
+    $scope.populateCategories =function(){
+      $scope.categories = Category.query();
+    };
+    $scope.populateCategories();
 
     $scope.userUpdate = function(user){
       User.userUpdate( {id:user._id} ,user,function(){

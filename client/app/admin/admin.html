@@ -125,9 +125,9 @@
 
       <!---- Update Product View ------>
       <div ng-show="updateProduct"><h3>Update Product</h3>
-
         <form name = 'productForm' ng-submit='productUpdate(productToUpdate)'>
           <div class="form-group update-list">
+            <div>{{productToUpdate.available ? "Available":"Unavailable"}}</div>
             <label class="col-sm-12 control-label">Product Name</label>
             <div class="col-sm-12">
               <input type="text" class="form-control" placeholder="product name" value="{{productToUpdate.name}}" ng-model="productToUpdate.name">
@@ -162,11 +162,12 @@
                 </li>
               </ul>
             </div>
-            <div class="col-sm-12">
+            <div class="btn-group col-sm-12">
               <button type="submit" class="btn btn-primary" ng-click="updateProduct=false">Update</button>
-            </div>
-            <div class="col-sm-12">
               <button ng-click='updateProduct=!updateProduct' type='button' class='btn btn-danger'>Cancel</button>
+            </div>
+            <div class='col-sm-12'>
+              <button type='button' ng-click="productToUpdate.available=!productToUpdate.available" class='btn btn-warning'>{{productToUpdate.available ? "Make Unavailable":"Make Available"}}</button>
             </div>
           
           </div>
@@ -175,16 +176,18 @@
 
       <div ng-hide="updateProduct || addProduct">
         <ul class="list-group">
-          <li  class="list-group-item" ng-repeat="product in products" >
+          <li  class="list-group-item" ng-repeat="product in products" ng-class="{unavailable:!product.available}">
             <span>
-              <strong>{{product.name}}</strong>
+              <strong>{{product.name}}</strong> - {{product.available ? "Available":"Unvailable"}} 
               <a ng-click="$parent.updateProduct=true; $parent.productToUpdate=product"><span class="glyphicon glyphicon-wrench pull-right"></a>
             </span>
             <br>
-            <span class="text-muted">{{product.description}} , {{product._id}}</span>
+            <span class="text-muted">{{product.description}}</span>
             <a ng-click="deleteProduct(product)" class="trash">
               <span class="glyphicon glyphicon-trash pull-right"> </span>
             </a>
+            <br>
+            <span class='text-muted'>Qty: {{product.qty}}</span>
           </li>
         </ul>
       </div>

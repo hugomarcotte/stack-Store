@@ -10,7 +10,7 @@ var ProductSchema = new Schema({
 	category: [],
 	review: [],
 	qty: Number,
-	active: {type: Boolean, default: true},
+	available: {type: Boolean, default: true},
 	image: {type: String, default: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"}
 });
 
