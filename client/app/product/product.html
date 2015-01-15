@@ -6,17 +6,20 @@
 		<img src="{{product.image}}">
 	</div>
 	<div class="col-lg-6 col-md-6 col-sm-6">
-		<div class="product-container">
+		<div style="display " class="product-container">
 			<h4>Product Description</h4>
 			<div class="product-description">
 				<h5>{{product.description}}</h5>
 			</div>
 			<h5>Stock: {{product.qty}}</h5>
 			<h5>Price: $ {{product.price}}</h5>
-		
-			<div class="button-group">
-				<button class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
-			</div>
+			<form ng-submit="addToCart(product, orderQuantity)">
+				<label style="display:inline-block; text-align:right;">Quantity: </label>
+				<input style="display: inline-block" ng-model="orderQuantity" type="number" placeholder="1"/>
+				<div class="button-group" style="margin-top: 10px;">
+					<button class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -26,7 +29,7 @@
 	<div class='col-lg-10 col-lg-offset-2'>
 		<form name='reviewForm' ng-submit="submitReview(product._id,reviewText)">
 			<div class='form-group'>
-				<button type='button' class='btn btn-warning' ng-hide='writeReview'ng-click="writeReview = true">Write a Review</button><br>
+				<button type='button' class='btn btn-warning' ng-show="checkLogIn() &&!writeReview" ng-click="writeReview = true">Write a Review</button><br>
 				<textarea ng-show='writeReview' placeholder='This product is so great' ng-model='reviewText'></textarea>
 
 				<br>

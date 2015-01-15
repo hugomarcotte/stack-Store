@@ -1,13 +1,22 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('ProductCtrl', function ($scope, $http, $stateParams,Review,User,Auth) {
+  .controller('ProductCtrl', function ($scope, $http, $stateParams,Review,User,Auth, Cart) {
     
     $scope.productId = $stateParams.id;
 
     $http.get('/api/products/'+$scope.productId).success(function(product) {
     	$scope.product = product;
     });
+
+    $scope.checkLogIn = function(){
+        if(Auth.isLoggedIn()){
+            return true;
+        }
+        else{
+             return false;
+        }
+    }
 
     $scope.submitReview = function(productId,reviewText,userId, stars){
     	var user = Auth.getCurrentUser();
@@ -25,6 +34,9 @@ angular.module('stackStoreApp')
     $scope.getReviews=function(){
     	$scope.reviews = Review.query();
     };
+    $scope.addToCart = function(product, quantity){
+        Cart.addItem(product, quantity)
+    }
     $scope.getReviews();
 
   });
