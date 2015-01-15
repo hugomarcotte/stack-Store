@@ -8,6 +8,7 @@
 var User = require('../api/user/user.model');
 var Product = require('../api/product/product.model');
 var Category = require('../api/category/category.model');
+var Role = require('../api/role/role.model');
 
 Product.find({}).remove(function() {
   Product.create({
@@ -116,3 +117,14 @@ Category.find({}).remove(function(){
     }
   )
 })
+
+Role.find({}).remove(function(){
+  Role.create(
+    {role: 'admin'},
+    {role: 'user'},
+    function(){
+      console.log('Populated Roles')
+    }
+  )
+})
+

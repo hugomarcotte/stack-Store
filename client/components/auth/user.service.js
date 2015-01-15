@@ -17,6 +17,14 @@ angular.module('stackStoreApp')
         params: {
           id:'me'
         }
-      }
-	  });
+      },
+      userUpdate:{
+          method:'PUT',
+          params:{
+            controller: 'hacked'
+          }
+        }
+	  }
+    
+    );
   });

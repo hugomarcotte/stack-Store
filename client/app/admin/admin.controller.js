@@ -1,15 +1,55 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User, Product) {
+  .controller('AdminCtrl', function ($scope, $http, Auth, User, Product, Role,Category ) {
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
-
     $scope.newProduct={category: []};
 
-    $scope.productUpdate = function(product) {
-      Product.updateProduct(product);
+    $scope.createNewProduct = function(product){
+      Product.save(product);
+      $scope.newProduct = {category: []};
+      $scope.populateProducts();
+    }
+
+    $scope.productUpdate = function(product){
+      Product.updateProduct({id:product._id},product)
+    }
+
+    $scope.populateProducts = function(){
+      $scope.products = Product.query();
+      console.log($scope.products)
+    }
+    $scope.populateProducts();
+
+    $scope.deleteProduct = function(product){
+      Product.delete({id:product._id});
+      $scope.products.forEach(function(prod,i){
+      if(prod === product){
+          $scope.products.splice(i,1);
+        };
+      })
+    }
+
+    $scope.populateRoles = function(){
+      $scope.roles = Role.query()
+    };
+    $scope.populateRoles();
+
+    $scope.populateCategories =function(){
+      $scope.categories = Category.query();
+    };
+    $scope.populateCategories();
+
+    $scope.userUpdate = function(user){
+      User.userUpdate( {id:user._id} ,user,function(){
+        console.log(user)
+        $scope.users = User.query()
+        },function(err){
+          console.log('Error: ',err)
+        }
+      )
     }
 
     $scope.deleteUser = function(user) {
@@ -20,36 +60,6 @@ angular.module('stackStoreApp')
         }
       });
     };
-
-    $scope.populateProducts = function(){
-      Product.getProducts(function(products) {
-      $scope.products = products;
-      })
-    };
-
-    $scope.populateProducts();
-
-    $scope.deleteProduct = function(product) {
-      // console.log('clicked')
-      // $http.delete('/api/products/'+product._id);
-      $scope.products.forEach(function(prod,i){
-      if(prod === product){
-          $scope.products.splice(i,1);
-        };
-      })
-      Product.deleteProduct(product);
-    };
-
-    $http.get('/api/categories').success(function(categories){
-      $scope.categories = categories;
-    })
-
-    $scope.createNewProduct = function(product){
-      Product.addProduct(product);
-      $scope.newProduct = {category: []};
-      $scope.populateProducts();
-    }
-
     $scope.addCategory = function() {
       if($scope.selectedCategory) {
         if($scope.newProduct.category.indexOf($scope.selectedCategory) === -1) {
@@ -62,11 +72,5 @@ angular.module('stackStoreApp')
       var newProduct = $scope.newProduct.category;
       newProduct.splice(newProduct.indexOf(category),1)
     }
-
-  $scope.userForms = {};
-
-  $scope.showUserForm = function(user) {
-    $scope.userForms[user._id + 'UserForm'] = true;
-  }
 
   })
