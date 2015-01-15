@@ -11,7 +11,7 @@ angular.module('stackStoreApp')
       console.log('add item');
       if(Auth.isLoggedIn()){
          console.log("cart")
-         currentOrder = $cookieStore.get('cart') || {_user:""};
+        currentOrder = $cookieStore.get('cart') || {_user:""};
      //   console.log($cookieStore.get('cart'));
         // console.log(orders);
         currentOrder._user = Auth.getCurrentUser()._id;
@@ -31,6 +31,7 @@ angular.module('stackStoreApp')
             console.log(updatedOrder);
 
             currentOrder = updatedOrder;
+            //$cookieStore.put('cart', currentOrder);
           });
         } 
         else
@@ -69,7 +70,7 @@ angular.module('stackStoreApp')
        //    currentOrder = currentOrder
        //  }
        $http.get('/api/orders/user/'+id).success(function(current){
-        currentOrder = current[0];
+        currentOrder = current;
         callback(currentOrder);
       })
      }

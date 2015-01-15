@@ -9,14 +9,23 @@
 	  <div>{{order}}</div>
 	  <!-- Table -->
 	  <table class="table">
-	    <tr>
-	    	<td>#</td>
+	  	<tr>
+	  		<td>#</td>
 	    	<td>Item</td>
 	    	<td>Price</td>
 	    	<td>Remove</td>
 	    	<td>Quantity</td>
 	    	<td>Cost</td>
-	    </tr>
+	  	</tr>
+	  	<tr ng-repeat="product in order">
+	  		<td>{{$index + 1}}</td>
+	  		<td>{{product.name}}</td>
+	  		<td>{{product.price}}</td>
+	  		<td></td>
+	  		<td></td>
+	  		<td></td>
+
+	  	</tr>
 	  </table>
 </div>
 </div>

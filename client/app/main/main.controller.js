@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('MainCtrl', function ($scope, $http, order) {
+  .controller('MainCtrl', function ($scope, $http, Cart) {
     $scope.awesomeThings = [];
 
     $http.get('/api/products').success(function(products) {
@@ -46,7 +46,7 @@ angular.module('stackStoreApp')
 
     $scope.addToCart = function(product){
       console.log("add to cart");
-      order.addItem(product)
+      Cart.addItem(product)
     };
 
   });
