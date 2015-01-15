@@ -60,7 +60,6 @@ exports.destroy = function(req, res) {
 exports.updateUser = function(req,res,next){  //only works if admin, look in index.js
   var userId = req.params.id;                 //this seems super secure
   var updatedUser = req.body;
-  console.log('REQ BODY ',req.body)
   User.findById(userId,function(err,user){
     user.email = updatedUser.email;
     user.role = updatedUser.role;
