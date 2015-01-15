@@ -22,6 +22,7 @@ angular.module('stackStoreApp')
     	var user = Auth.getCurrentUser();
     	var newReview ={
     		_product: productId,
+            username: user.name,
     		_user:user._id,
     		text: reviewText,
     		stars: stars || null

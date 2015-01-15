@@ -14,4 +14,10 @@ var ProductSchema = new Schema({
 	image: {type: String, default: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"}
 });
 
+ProductSchema.methods.addReview = function(productId, reviewId){
+	this.review.addToSet(reviewId);
+	this.save(function(err, product) {
+		
+	});
+}
 module.exports = mongoose.model('Product', ProductSchema);
