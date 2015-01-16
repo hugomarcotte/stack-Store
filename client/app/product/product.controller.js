@@ -28,7 +28,6 @@ angular.module('stackStoreApp')
     	$scope.reviews = Review.getProductReviews({productId: $scope.productId});
     };
 
-
     $scope.addToCart = function(product, quantity){
         Cart.addItem(product, quantity)
     }

@@ -27,4 +27,5 @@ ProductSchema.methods.convertMoney = function(){
 	}
 	return this;
 }
+
 module.exports = mongoose.model('Product', ProductSchema);
