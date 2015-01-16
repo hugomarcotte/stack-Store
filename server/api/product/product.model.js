@@ -27,4 +27,9 @@ ProductSchema.methods.convertMoney = function(){
 	}
 	return this;
 }
+
+ProductSchema.methods.updateQuantity = function(quantity){
+	this.qty -= quantity;
+	this.save();
+}
 module.exports = mongoose.model('Product', ProductSchema);
