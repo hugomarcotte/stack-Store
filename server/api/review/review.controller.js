@@ -13,10 +13,10 @@ exports.index = function(req, res) {
 
 // Get a single review
 exports.show = function(req, res) {
-  Review.findById(req.params.id, function (err, review) {
+  Review.find({_product:req.params.productId}, function (err, reviews) {
     if(err) { return handleError(res, err); }
-    if(!review) { return res.send(404); }
-    return res.json(review);
+    if(!reviews) { return res.send(404); }
+    return res.json(reviews);
   });
 };
 

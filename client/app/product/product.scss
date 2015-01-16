@@ -5,7 +5,14 @@
 	padding-top: 10px;
 	padding-bottom: 10px;
 	padding-left: 25px;
-	background-color: #4393B9;
-	color: white;
 	border-radius: 20px;
+}
+
+.product-container{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	position: absolute;
+	top: 25px;
+	
 }

@@ -15,7 +15,6 @@ exports.show = function(req, res) {
   Product.findById(req.params.id, function (err, product) {
     if(err) { return handleError(res, err); }
     if(!product) { return res.send(404); }
-    console.log(product);
     return res.json(product);
   });
 };
