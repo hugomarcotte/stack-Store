@@ -1,21 +1,13 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('ProductCtrl', function ($scope, $http, $stateParams,Review,User,Auth, Cart) {
+  .controller('ProductCtrl', function ($scope, $http, $stateParams,Review,User,Auth,Cart,Product) {
     
     $scope.productId = $stateParams.id;
-
-    $http.get('/api/products/'+$scope.productId).success(function(product) {
-    	$scope.product = product;
-    });
+    $scope.product = Product.get({id:$scope.productId});
 
     $scope.checkLogIn = function(){
-        if(Auth.isLoggedIn()){
-            return true;
-        }
-        else{
-             return false;
-        }
+        return Auth.isLoggedIn() ? true : false;
     }
 
     $scope.submitReview = function(productId,reviewText,userId, stars){
