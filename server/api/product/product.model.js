@@ -15,9 +15,7 @@ var ProductSchema = new Schema({
 });
 
 ProductSchema.methods.addReview = function(productId, reviewId){
-	this.review.addToSet(reviewId);
-	this.save(function(err, product) {
-		
-	});
+	this.review.push(reviewId);
+	this.save();
 }
 module.exports = mongoose.model('Product', ProductSchema);

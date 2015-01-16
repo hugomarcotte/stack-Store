@@ -15,8 +15,9 @@ var ReviewSchema = new Schema({
 ReviewSchema.pre('save', function(next){
 	if(!this.isNew) return next();
 	else {
+		var review = this;
 		Product.findOne({ _id: this._product }, function(err, product) {
-			product.addReview(this._product, this._id);
+			product.addReview(review._product, review._id);
 			next();
 		});
 	}
