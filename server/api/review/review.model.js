@@ -22,4 +22,11 @@ ReviewSchema.pre('save', function(next){
 		});
 	}
 })
+
+ReviewSchema.methods.getProductReview = function(productId){
+	ReviewSchema.find({_product:productId})
+}
+
+
+
 module.exports = mongoose.model('Review', ReviewSchema);

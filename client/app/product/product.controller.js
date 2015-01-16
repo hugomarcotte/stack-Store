@@ -33,8 +33,10 @@ angular.module('stackStoreApp')
     }
     
     $scope.getReviews=function(){
-    	$scope.reviews = Review.query();
+    	$scope.reviews = Review.getProductReviews({productId: $scope.productId});
     };
+
+
     $scope.addToCart = function(product, quantity){
         Cart.addItem(product, quantity)
     }
