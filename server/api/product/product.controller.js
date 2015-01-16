@@ -20,30 +20,53 @@ exports.show = function(req, res) {
   });
 };
 ///Searches for products by name
-exports.searchTerm = function(req, res) {
+// exports.searchTerm = function(req, res) {
+//   var name = req.params.searchTerm;
+//   Product.find({name: {$regex: name, $options:"$i"}}, function (err, products) {
+//     if(err) { return handleError(res, err); }
+//     return res.json(200, products);
+//   })
+// };
+// /// Searches for products by category
+// exports.searchCat = function(req, res) {
+//   var cat = req.params.searchCat;
+//   Product.find({category: {$regex: cat, $options:"$i"}}, function (err, products) {
+//     if(err) { return handleError(res, err); }
+//     return res.json(200, products);
+//   })
+// };
+// //// Search for products within a category
+// exports.searchByCat = function(req, res){
+//   var name = req.params.searchTerm;
+//   var cat = req.query.category;
+//   Product.find({name: {$regex: name, $options:"$i"}, category: cat}, function (err, products) {
+//     if(err) { return handleError(res, err); }
+//     return res.json(200, products);
+//   })
+// }
+
+exports.nameSearch = function(req, res) {
   var name = req.params.searchTerm;
-  Product.find({name: {$regex: name, $options:"$i"}}, function (err, products) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, products);
-  })
-};
-/// Searches for products by category
-exports.searchCat = function(req, res) {
-  var cat = req.params.searchCat;
-  Product.find({category: {$regex: cat, $options:"$i"}}, function (err, products) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, products);
-  })
-};
-//// Search for products within a category
-exports.searchByCat = function(req, res){
-  var name = req.params.searchTerm;
-  var cat = req.params.searchCat;
-  Product.find({name: {$regex: name, $options:"$i"}, category: cat}, function (err, products) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, products);
-  })
+  var category = req.query.category;
+    Product
+    .nameSearch(name)
+    .catSearch(category)
+    .exec(function(err, products) {
+      return res.json(200, products);
+    })
 }
+
+exports.search = function(req, res) {
+  var name = req.params.name;
+  var category = req.params.category;
+  console.log(name, category)
+  Product
+    .nameSearch(name)
+    .exec(function(err, products) {
+      return res.json(200, products);
+    })
+}
+
 
 // Creates a new product in the DB.
 exports.create = function(req, res) {

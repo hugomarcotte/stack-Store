@@ -5,7 +5,7 @@
     <h1>Slack Store</h1> <!-- I approve of this typo -->
     <p class="lead">Buy wonderful products</p>
   </div>
-  <form class="navbar-form" role="search">
+  <form class="navbar-form" role="search" ng-submit="search(searchTerm)">
     <div class="form-group">
           <span class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
@@ -20,14 +20,15 @@
               </li>
             </ul>
           </span>
-        <input type="text" class="form-control" placeholder="Search" ng-model="searchTerm">
+        <input type="text" class="form-control" placeholder="Search" ng-model="searchTerm.name">
     </div>
-    <button type="submit" class="btn btn-default" ng-click="search()">Submit</button>
+    {{searchTerm}}
+    <button class="btn btn-default">Submit</button>
   </form>
 </header>
 
 <div class="container">
-  <h1>{{pCategory}}</h1>
+  <h1>{{searchTerm.category}}</h1>
   <div class="row product-grid">
     <div class="col-lg-12">
       <ul class="nav nav-stacked product-display col-md-4 col-lg-4 col-sm-6" ng-repeat="product in products">

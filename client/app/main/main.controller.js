@@ -12,6 +12,8 @@ angular.module('stackStoreApp')
       $scope.categories = categories;
     });
 
+    $scope.searchTerm = {name: '', category: ''};
+
     $scope.addThing = function() {
       if($scope.newThing === '') {
         return;
@@ -25,23 +27,24 @@ angular.module('stackStoreApp')
     };
 
     $scope.search = function() {
-      if($scope.pCategory){
-        $http.get('/api/products/search/'+$scope.searchTerm+'/'+$scope.pCategory).success(function(products) {
-          $scope.products = products;
-        })
-      }
-      else{
-        $http.get('/api/products/search/'+$scope.searchTerm).success(function(products) {
-          $scope.products = products;
-        })
-      }
+      var name = $scope.searchTerm.name;
+      var category = $scope.searchTerm.category;
+      var rtName = (!name) ? '' : '/' + name;
+      var rtCategory = (!category) ? '' : '/' + category;
+
+      $http.get('/api/products/search'+rtName+rtCategory)
+        .success(function(products) {
+        $scope.products = products;
+      })
+
     };
 
     $scope.categorySearch = function(cat) {
-      $http.get('/api/products/category/'+cat).success(function(products) {
-        $scope.pCategory = cat;
-        $scope.products = products;
-      })
+      $scope.searchTerm.category = cat
+      // $http.get('/api/products/category/'+cat).success(function(products) {
+      //   $scope.searchTerm.category = cat;
+      //   $scope.products = products;
+      // })
     };
 
     $scope.addToCart = function(product){
