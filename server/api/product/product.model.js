@@ -17,5 +17,14 @@ var ProductSchema = new Schema({
 ProductSchema.methods.addReview = function(productId, reviewId){
 	this.review.push(reviewId);
 	this.save();
+};
+
+ProductSchema.methods.convertMoney = function(){
+	if(this.price.toString().indexOf('.')===-1){
+		this.price = this.price/100;	
+	} else {
+		this.price = this.price*100;
+	}
+	return this;
 }
 module.exports = mongoose.model('Product', ProductSchema);

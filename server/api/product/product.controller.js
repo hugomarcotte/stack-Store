@@ -6,6 +6,9 @@ var Product = require('./product.model');
 // Get list of products
 exports.index = function(req, res) {
   Product.find(function (err, products) {
+    products.forEach(function(prod){
+      prod.convertMoney();
+    })
     if(err) { return handleError(res, err); }
     return res.json(200, products);
   });
@@ -13,6 +16,7 @@ exports.index = function(req, res) {
 // Get a single product
 exports.show = function(req, res) {
   Product.findById(req.params.id, function (err, product) {
+    product.convertMoney();
     if(err) { return handleError(res, err); }
     if(!product) { return res.send(404); }
     return res.json(product);
@@ -47,6 +51,7 @@ exports.searchByCat = function(req, res){
 // Creates a new product in the DB.
 exports.create = function(req, res) {
   Product.create(req.body, function(err, product) {
+    product.convertMoney();
     if(err) { return handleError(res, err); }
     return res.json(201, product);
   });
@@ -59,6 +64,7 @@ exports.update = function(req, res) {
     if (err) { return handleError(res, err); }
     if(!product) { return res.send(404); }
     var updated = _.merge(product, req.body);
+    updated.convertMoney();
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, product);
