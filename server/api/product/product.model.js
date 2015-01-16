@@ -4,9 +4,9 @@ var mongoose = require('mongoose'),
 Schema = mongoose.Schema;
 
 var ProductSchema = new Schema({
-	name: {type:String,required:true},
+	name: {type:String,required:true, unique: true},
 	price: {type:Number,required:true},
-	description: String,
+	description: {type:String, required: true},
 	category: {type:Array,default:["Misc"]},
 	review: [{type: Schema.Types.ObjectId, ref: 'Review'}],
 	qty: {type:Number,default:0},

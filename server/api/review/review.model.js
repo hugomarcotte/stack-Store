@@ -4,12 +4,16 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Product = require('../product/product.model');
 
+function validator(v){
+	return v.length > 10;
+};
+
 var ReviewSchema = new Schema({
-  _user: {type: Schema.Types.ObjectId, ref: 'User'},
+  _user: {type: Schema.Types.ObjectId, ref: 'User', required: true},
   username: String,
-  _product: {type: Schema.Types.ObjectId, ref: 'Product'},
+  _product: {type: Schema.Types.ObjectId, ref: 'Product', required:true},
   stars: Number,
-  text: String
+  text: {type: String, validate:[validator, 'my error type']}
 });
 
 ReviewSchema.pre('save', function(next){
