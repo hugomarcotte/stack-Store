@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('ProductCtrl', function ($scope, $http, $stateParams,Review,User,Auth,Cart,Product) {
+  .controller('ProductCtrl', function ($scope, $http, $stateParams,Review,User,Auth,CartCookies,Product) {
     
     $scope.productId = $stateParams.id;
     $scope.product = Product.get({id:$scope.productId});
@@ -30,7 +30,7 @@ angular.module('stackStoreApp')
 
 
     $scope.addToCart = function(product, quantity){
-        Cart.addItem(product, quantity)
+        CartCookies.addItem(product, quantity)
     }
     $scope.getReviews();
 

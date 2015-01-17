@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stackStoreApp')
-.factory('Cart',function (Auth, User, $http, $cookieStore) {
+.factory('CartCookies',function (Auth, User, $http, $cookieStore) {
   var currentOrder = [];
 
   return {
@@ -9,28 +9,25 @@ angular.module('stackStoreApp')
   		return $cookieStore.get('cart');
   	},
 
-    updateCart: function(currentOrder){
-      $cookieStore.put('cart', currentOrder)
+    createCookie: function(cartId){
+      $cookieStore.put('cart', cartId)
+
     },
-    addItem : function(product, qty){
+    addItem : function(productId, qty){
 
-      // pass quantity (product detail)
-      // update quantity if product already in cart
       currentOrder = $cookieStore.get('cart') || [];
-
-      var find = false;
-      currentOrder.forEach(function(item){
-        if(item.product._id === product._id) {
+      var found = false;
+      currentOrder.forEach(function(item){        
+        if(item.product === productId) {
           item.qty += qty;
-          find = true;
+          found = true;
         }
       });
-
-      if(!find) {
-        currentOrder.push({product:product, qty:qty});
+      if(!found) {
+        currentOrder.push({product:productId, qty:qty});
       }
-
       $cookieStore.put('cart', currentOrder)
+      
 
     },
     removeItem : function(product) {
