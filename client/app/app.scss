@@ -15,6 +15,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     padding: 0.2em 0;
 }
 
+.center-items {
+	text-align: center;
+}
+
 .product-image{
   width: 20%;
 }
@@ -27,6 +31,17 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 	width: 200px;
 	height: 200px;
 	margin: 5px 0px;
+}
+
+.category-section {
+	display: block;
+	width: 96%;
+	height: 34px;
+	padding: 6px 12px;
+	line-height: 1.43;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	margin: 5px 15px;
 }
 
 // Component styles are injected through grunt
