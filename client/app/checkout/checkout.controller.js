@@ -57,7 +57,6 @@ angular.module('stackStoreApp')
             exp_month: exp_month,
             exp_year: exp_year
         }, function(status, response){
-            console.log(response)
             $scope.placeOrder($scope.order, response.id)
         })
     }
