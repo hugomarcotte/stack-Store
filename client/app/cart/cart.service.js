@@ -11,6 +11,14 @@ angular.module('stackStoreApp')
                 id: '@id',
                 prodId: '@prodId'
                 }
+        },
+
+        cartPage: {
+          method: 'GET',
+          params: {
+            id: '@id',
+            prodId: 'cartView'
+          }
         }
       });
     }

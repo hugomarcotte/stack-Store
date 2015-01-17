@@ -29,9 +29,9 @@ angular.module('stackStoreApp')
     };
 
 
-    $scope.addToCart = function(product, quantity){
-        CartCookies.addItem(product, quantity)
-    }
+    $scope.addToCart = function(productId,quantity){
+        CartCookies.addToCart(productId,quantity);
+    };
     $scope.getReviews();
 
   });

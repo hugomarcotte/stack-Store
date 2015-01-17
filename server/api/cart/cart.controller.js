@@ -20,6 +20,17 @@ exports.show = function(req, res) {
   });
 };
 
+//Populate for the Cart page
+exports.populated = function(req, res) {
+  Cart.findById(req.params.id)
+    .populate('products')
+    .exec(function(err,cart){
+      if(err) { return handleError(res, err); }
+      if(!cart) { return res.send(404); }
+      return res.json(cart);
+    })
+};
+
 // Creates a new cart in the DB.
 exports.create = function(req, res) {
   Cart.create(req.body, function(err, cart) {
@@ -30,14 +41,12 @@ exports.create = function(req, res) {
 
 // Updates an existing cart in the DB.
 exports.update = function(req, res) {
-  console.log('req body ',req.body)
   if(req.body._id) { delete req.body._id; }
   Cart.findById(req.params.id, function (err, cart) {
     if (err) { return handleError(res, err); }
     if(!cart) { return res.send(404); }
     var updated = _.extend(cart,req.body)
     updated.save(function (err) {
-      console.log('Saved: ',arguments)
       if (err) { return handleError(res, err); }
       return res.json(200, cart);
     });

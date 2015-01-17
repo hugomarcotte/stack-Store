@@ -32,25 +32,8 @@ angular.module('stackStoreApp')
       })
     };
 
-//Need to findOrCreate a cart here, and stick the cart ID in the cookie
-//and then hit the product database to retrieve the product
-//and put it in the cart
-    $scope.addToCart = function(productId){ 
-      var cartId = CartCookies.getCart();
-      if(cartId){
-        Cart.get({id:cartId},function(result){
-          result.products.push(productId);
-
-          Cart.updateCart({id: cartId},{products:result.products},function(secondRes){
-          })
-        })
-      } else {
-        var userId = Auth.getCurrentUser()._id;
-        var newCart ={userId: userId, products: productId}
-          Cart.save(newCart,function(createdCart){
-            CartCookies.createCookie(createdCart._id)
-          });
-      }
+    $scope.addToCart = function(productId){
+      CartCookies.addToCart(productId);
     };
 
   });
