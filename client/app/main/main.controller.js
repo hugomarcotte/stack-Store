@@ -12,18 +12,6 @@ angular.module('stackStoreApp')
       $scope.categories = categories;
     });
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
-
     $scope.search = function() {
       if($scope.pCategory){
         $http.get('/api/products/search/'+$scope.searchTerm+'/'+$scope.pCategory).success(function(products) {
