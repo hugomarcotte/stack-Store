@@ -7,7 +7,6 @@
 	 	<div class="row status-box">
 	 		<h3>{{productToUpdate.available ? "Available" : "Unavailable"}}</h3> 
 	 	</div>
-	 	{{productToUpdate}}
 	</div>
 	<div class="row col-md-9">
 	  <div class="form-group">
@@ -45,7 +44,7 @@
 	      </ul>
 	    </div>
 	    <div class="btn-group col-sm-12">
-	      <button type="submit" class="btn btn-primary">Save</button>
+	      <button type="submit" class="btn btn-primary" ng-click="updateProduct=false">Save</button>
 	      <button type='button' ng-click='updateProduct=!updateProduct' class='btn btn-danger'>Cancel</button>
 	    </div>
 	    <div class='col-sm-12'>
