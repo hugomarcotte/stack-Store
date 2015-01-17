@@ -5,7 +5,11 @@ var mongoose = require('mongoose'),
 
 var CartSchema = new Schema({
   userId: {type: String, required: true} ,
-  products: [{type: Schema.Types.ObjectId, ref: 'Product',qty:{type:Number}}], //productId references, in case prices change
+  products: [{
+  	productId: {type: Schema.Types.ObjectId, ref: 'Product'},
+  	qty: {type: Number,default:1}
+  }],
+  // products: [{type: Schema.Types.ObjectId, ref: 'Product',qty:{type:Number}}], //productId references, in case prices change
   submitted: {type: Boolean, default: false}
 });
 

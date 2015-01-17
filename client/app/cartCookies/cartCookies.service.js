@@ -22,11 +22,7 @@ angular.module('stackStoreApp')
         })
       } else {
         var userId = Auth.getCurrentUser()._id;
-        var products=[];
-        while(numToAdd){
-          products.push(productId);
-          numToAdd--
-        }
+        var products=[{productId:productId,qty:numToAdd}];
         var newCart ={userId: userId, products: products}
           Cart.save(newCart,function(createdCart){
             $cookieStore.put('cart',createdCart._id)
