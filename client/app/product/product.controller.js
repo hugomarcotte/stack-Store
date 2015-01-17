@@ -10,7 +10,7 @@ angular.module('stackStoreApp')
         return Auth.isLoggedIn() ? true : false;
     }
 
-    $scope.submitReview = function(productId,reviewText,userId, stars){
+    $scope.submitReview = function(productId,reviewText, stars){
     	var user = Auth.getCurrentUser();
     	var newReview ={
     		_product: productId,
@@ -21,6 +21,7 @@ angular.module('stackStoreApp')
     	}
     	Review.save(newReview,function(){
     		$scope.getReviews();
+            $scope.reviewText = "";
     	})
     }
     
@@ -32,6 +33,12 @@ angular.module('stackStoreApp')
     $scope.addToCart = function(product, quantity){
         Cart.addItem(product, quantity)
     }
+    $scope.range = function(min, max, step){
+        step = step || 1;
+        var input = [];
+        for (var i = min; i <= max; i += step) input.push(i);
+        return input;
+      };
     $scope.getReviews();
 
   });
