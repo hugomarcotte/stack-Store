@@ -7,8 +7,8 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
+router.get('/search/:name', controller.search)
 router.get('/search/:name/:category', controller.search)
-router.get('/search/:category', controller.search)
 router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);

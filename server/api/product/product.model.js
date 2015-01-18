@@ -14,12 +14,13 @@ var ProductSchema = new Schema({
 	image: {type: String, default: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"}
 });
 
-ProductSchema.statics.nameSearch = function(name, cb) {
-    return this.find({name: {$regex: name, $options:"$i"}}, cb);
+ProductSchema.statics.nameSearch = function(name) {
+    return this.find({name: {$regex: name, $options:"$i"}});
 };
 
-ProductSchema.statics.categorySearch = function(cat, cb) {
-    return this.where('category', {$regex: cat, $options:"$i"}, cb);
+ProductSchema.statics.categorySearch = function(category) {
+    return this.find({category: {$regex: category, $options:"$i"}});
 };
+
 
 module.exports = mongoose.model('Product', ProductSchema);

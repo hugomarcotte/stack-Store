@@ -29,27 +29,23 @@ angular.module('stackStoreApp')
     $scope.search = function() {
       var name = $scope.searchTerm.name;
       var category = $scope.searchTerm.category;
-      var rtName = (!name) ? '' : '/' + name;
-      var rtCategory = (!category) ? '' : '/' + category;
+      var route;
 
-      $http.get('/api/products/search'+rtName+rtCategory)
+      if(!name) {
+        route = '/api/categories/search/'+category;
+      } else {
+        route = '/api/products/search/'+name+'/'+category;
+      }
+
+      $http.get(route)
         .success(function(products) {
         $scope.products = products;
       })
 
     };
 
-    $scope.categorySearch = function(cat) {
-      $scope.searchTerm.category = cat
-      // $http.get('/api/products/category/'+cat).success(function(products) {
-      //   $scope.searchTerm.category = cat;
-      //   $scope.products = products;
-      // })
-    };
-
     $scope.addToCart = function(product){
       console.log("add to cart");
       Cart.addItem(product, 1)
     };
-
   });
