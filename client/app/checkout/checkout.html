@@ -1,0 +1,55 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="row">
+	<div class="col-lg-6 col-sm-6 col-md-6" ng-hide="validOrder">
+		<h1>You have no items to check out!</h1>
+	</div>
+	<div class="col-lg-6 col-sm-6 col-md-6" ng-show="validOrder">
+		<h1>Checkout</h1>
+		<div><a href="/cart"><button class="btn btn-primary" style="margin: 10px;">Edit Cart</button></a></div>
+		<ul class="list-group">
+	      <li class="list-group-item" ng-repeat="item in order"> {{item}}
+	          <img class="cart-img" src="{{item.product.image}}">
+	          <br>
+	          <b>{{item.product.name}}</b>
+	          <p>{{item.product.price | currency}}</p>
+	          <p>Quantity: {{item.qty}}</p>
+	      </li>
+	    </ul>
+	</div>
+	<div class="col-lg-6 col-sm-6 col-md-6" ng-show="validOrder">
+		<h1>Total: {{totalPriceCalculator() |currency}}</h1>
+		<h2>Enter Credit Card Information: </h2>
+
+		<form class="form-group" id="payment-form" ng-submit="submitPayment(stripe_number, stripe_cvc, exp_month, exp_year)">
+		  <span class="payment-errors"></span>
+
+		  <div class="form-row">
+		    <label>
+		      <span>Card Number</span>
+		      <input type="text" size="20" ng-model="stripe_number" required/>
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span>CVC</span>
+		      <input type="text" size="4" ng-model="stripe_cvc"/>
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span>Expiration (MM/YYYY)</span>
+		      <input type="text" size="2" ng-model="exp_month"/>
+		    </label>
+		    <span> / </span>
+		    <input type="text" size="4" ng-model="exp_year"/>
+		  </div>
+
+		  <button class="btn btn-primary" style="margin: 10px;" ng-disabled="payed">Submit Payment</button>
+		</form>
+		
+	</div>
+</div>
+
+<div class="col-sm-12" ng-include="'components/footer/footer.html'"></div>

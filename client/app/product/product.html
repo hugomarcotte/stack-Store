@@ -1,30 +1,47 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-
 <div class="row">
 	<div class="detail-left col-lg-6 col-md-6 col-sm-6">
 		<h1>{{product.name}}</h1>
 		<img src="{{product.image}}">
 	</div>
 	<div class="col-lg-6 col-md-6 col-sm-6">
-		<div class="product-container">
+		<div style="display " class="product-container">
 			<h4>Product Description</h4>
 			<div class="product-description">
 				<h5>{{product.description}}</h5>
 			</div>
 			<h5>Stock: {{product.qty}}</h5>
 			<h5>Price: $ {{product.price}}</h5>
-		
-			<div class="button-group">
-				<button class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
+			<form name="products" ng-submit="addToCart(product._id,productQuantity)">
+				<label style="display:inline-block; text-align:right;">Quantity: </label>
+				<input style="display: inline-block" ng-model="productQuantity" ng-init="productQuantity=1" type="number" name="quantity" min="1">
+				<div class="button-group" style="margin-top: 10px;">
+					<button class="btn btn-primary product-btn"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
+				</div>
+			</form>
+			<div>
+				<button type='button' class='btn btn-warning product-btn' ng-show="checkLogIn() &&!writeReview" ng-click="writeReview = true">Write a Review</button>
+				<write-review ng-show="writeReview"></write-review>
 			</div>
 		</div>
 	</div>
 </div>
 
-<footer class="footer">
-  <div class="container">
-      <p>Angular Fullstack v2.0.13 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
-  </div>
-</footer>
+<div class='row' ng-show="reviews.length">
+	<div class='col-lg-10 col-lg-offset-2 review-container'><h4>Reviews</h4>
+		<ul class="list-group">
+			<li  class="list-group-item" ng-repeat="review in reviews">
+				<span>
+					<span ng-repeat="i in range(1,review.stars)">
+						<span class="glyphicon glyphicon-star"></span>
+					</span><br>
+					<h5><strong>{{review.username}}</strong></h5>
+					<p>{{review.text}}</p>
+					<h6>{{review.date | date:'medium'}}</h6>
+				</span>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<!-- <div class="col-sm-12" ng-include="'components/footer/footer.html'"></div> -->

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('MainCtrl', function ($scope, $http, Cart) {
+  .controller('MainCtrl', function ($scope, $http, Cart,CartCookies,Auth) {
     $scope.awesomeThings = [];
 
     $http.get('/api/products').success(function(products) {
@@ -13,18 +13,6 @@ angular.module('stackStoreApp')
     });
 
     $scope.searchTerm = {name: '', category: ''};
-
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
 
     $scope.search = function() {
       var name = $scope.searchTerm.name;
@@ -44,8 +32,7 @@ angular.module('stackStoreApp')
 
     };
 
-    $scope.addToCart = function(product){
-      console.log("add to cart");
-      Cart.addItem(product, 1)
+    $scope.addToCart = function(productId){
+      CartCookies.addToCart(productId);
     };
   });
