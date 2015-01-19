@@ -1,20 +1,26 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('CartCtrl', function ($scope, Cart, $cookieStore) {
-    $scope.cartOrder = Cart.getCart();
+  .controller('CartCtrl', function ($scope, Cart, CartCookies,$cookieStore) {
+    var cartId = $cookieStore.get('cart');
+    
+    Cart.cartPage({id:cartId},function(results){
+      $scope.cart = results.products;
+    });
     $scope.isSaved = false;
 
-    $scope.cartIsEmpty = $scope.cartOrder.length == 0;
+    // $scope.cartIsEmpty = $scope.cart.length == 0;
 
-    $scope.removeItem = function(product) {
-      Cart.removeItem(product);
-      $scope.cartOrder = Cart.getCart();
-      $scope.cartIsEmpty = $scope.cartOrder.length == 0;
+    $scope.removeItem = function(productId) {
+      CartCookies.removeItem(productId);
+      
+      $scope.cart = $scope.cart.filter(function(item){
+         return item.productId._id!==productId
+      })
     };
 
     $scope.cartUpdate = function() {
-    	Cart.updateCart($scope.cartOrder);
+    	Cart.updateCart($scope.cart);
     	$scope.isSaved = true;
     };
 

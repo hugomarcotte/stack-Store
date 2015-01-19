@@ -13,7 +13,8 @@ var ReviewSchema = new Schema({
   username: String,
   _product: {type: Schema.Types.ObjectId, ref: 'Product', required:true},
   stars: Number,
-  text: {type: String, validate:[validator, 'my error type']}
+  text: {type: String, validate:[validator, 'my error type']},
+  date: {type: Date, default: Date.now}
 });
 
 ReviewSchema.pre('save', function(next){

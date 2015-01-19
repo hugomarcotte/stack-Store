@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, $cookieStore) {
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
@@ -15,6 +15,7 @@ angular.module('stackStoreApp')
     $scope.logout = function() {
       Auth.logout();
       $location.path('/login');
+      $cookieStore.remove('cart');
     };
 
     $scope.isActive = function(route) {
