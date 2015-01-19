@@ -26,7 +26,7 @@
 	  		<td> {{product.productId.price | currency: "$ "}}</td>
 			<td class="cart-qty"><input type="number" class="form-control pull-right" min="1" ng-model="product.qty" ng-change="$parent.isSaved=false"></td>
 	  		<td>{{product.qty * product.productId.price | currency: "$ "}}</td>
-	  		<td><span style="cursor: pointer;" class="glyphicon glyphicon-remove" ng-click="removeItem(product)"></span> </td>
+	  		<td><span style="cursor: pointer;" class="glyphicon glyphicon-remove" ng-click="removeItem(product.productId._id)"></span> </td>
 
 	  	</tr>
 	  	<tr>

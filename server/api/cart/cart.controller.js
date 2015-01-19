@@ -25,7 +25,6 @@ exports.populated = function(req, res) {
   Cart.findById(req.params.id)
     .populate('products.productId')
     .exec(function(err,cart){
-      console.log(cart)
       if(err) { return handleError(res, err); }
       if(!cart) { return res.send(404); }
       return res.json(cart);
@@ -43,9 +42,8 @@ exports.create = function(req, res) {
 // Updates an existing cart in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
+  console.log('UPDATE REQ ',req.body)
   Cart.findById(req.params.id, function (err, cart) {
-    // console.log('Cart ',cart)
-    // console.log('req.body ',req.body)
     if (err) { return handleError(res, err); }
     if(!cart) { return res.send(404); }
     var updated = _.extend(cart,req.body)

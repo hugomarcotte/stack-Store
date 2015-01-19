@@ -6,16 +6,17 @@ angular.module('stackStoreApp')
     
     Cart.cartPage({id:cartId},function(results){
       $scope.cart = results.products;
-      // var countProducs
     });
     $scope.isSaved = false;
 
     // $scope.cartIsEmpty = $scope.cart.length == 0;
 
-    $scope.removeItem = function(product) {
-      Cart.removeItem(product);
-      $scope.cart = Cart.getCart();
-      // $scope.cartIsEmpty = $scope.cart.length == 0;
+    $scope.removeItem = function(productId) {
+      CartCookies.removeItem(productId);
+      
+      $scope.cart = $scope.cart.filter(function(item){
+         return item.productId._id!==productId
+      })
     };
 
     $scope.cartUpdate = function() {

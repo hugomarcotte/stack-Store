@@ -43,35 +43,20 @@ angular.module('stackStoreApp')
   		return $cookieStore.get('cart');
   	},
 
-    // addItem : function(productId, qty){
+    removeItem : function(productId) {
+      var cartId = $cookieStore.get('cart');
+      Cart.get({id:cartId},function(result){
+        result.products.forEach(function(prod,i,arr){
+          if(prod.productId === productId){
+            result.products.splice(i,1);
+          }
+        });
 
-    //   currentOrder = $cookieStore.get('cart') || [];
-    //   var found = false;
-    //   currentOrder.forEach(function(item){        
-    //     if(item.product === productId) {
-    //       item.qty += qty;
-    //       found = true;
-    //     }
-    //   });
-    //   if(!found) {
-    //     currentOrder.push({product:productId, qty:qty});
-    //   }
-    //   $cookieStore.put('cart', currentOrder)
-      
+        Cart.updateCart({id:cartId},{products:result.products})
+        
+      })
 
-    // },
-    removeItem : function(product) {
-
-      currentOrder = $cookieStore.get('cart') || [];
-
-      currentOrder.forEach(function(item, index){
-     
-        if(item.product._id === product.product._id) {
-          currentOrder.splice(index,1);
-        }
-      });
-
-      $cookieStore.put('cart', currentOrder)
+      // $cookieStore.put('cart', currentOrder)
     },
     clearCart: function(){
 
