@@ -5,12 +5,15 @@ angular.module('stackStoreApp')
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
-    $scope.newProduct={category: []};
+    $scope.newProduct = {category: []};
+    $scope.addProduct = false;
+    $scope.updateProduct = false;
 
     $scope.createNewProduct = function(product){
       Product.save(product);
       $scope.newProduct = {category: []};
       $scope.populateProducts();
+      $scope.addProduct = false;
     }
 
     $scope.productUpdate = function(product){

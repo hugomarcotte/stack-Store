@@ -41,5 +41,5 @@ ProductSchema.methods.updateQuantity = function(quantity){
 	this.qty -= quantity;
 	this.save();
 }
->>>>>>> master
+
 module.exports = mongoose.model('Product', ProductSchema);

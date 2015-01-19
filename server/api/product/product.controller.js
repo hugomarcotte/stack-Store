@@ -1,6 +1,8 @@
 'use strict';
 
 var _ = require('lodash');
+var Filepicker = require('filepicker');
+var filepicker = new Filepicker('AN7AnbQhRSAeOf7vYBLeBz');
 var Product = require('./product.model');
 
 // Get list of products

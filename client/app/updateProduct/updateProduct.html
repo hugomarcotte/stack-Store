@@ -1,0 +1,55 @@
+<form name = 'productForm' ng-submit='productUpdate(productToUpdate)'>
+	<div class="row col-md-3 center-items">
+		<div class="row">
+	    <img class="image-preview" src="{{productToUpdate.image}}">
+	  </div>
+	 		<input class="btn btn-primary" type="filepicker" data-fp-apikey="AN7AnbQhRSAeOf7vYBLeBz" data-fp-mimetypes="image/*" data-fp-container="modal" data-fp-services="COMPUTER" onchange="event.fpfile.url" ng-model="productToUpdate.image">
+	 	<div class="row status-box">
+	 		<h3>{{productToUpdate.available ? "Available" : "Unavailable"}}</h3> 
+	 	</div>
+	</div>
+	<div class="row col-md-9">
+	  <div class="form-group">
+	    <label class="col-sm-12 control-label">Product Name</label>
+	    <div class="col-sm-12">
+	      <input type="text" class="form-control" placeholder="product name" value="{{productToUpdate.name}}" ng-model="productToUpdate.name">
+	    </div>
+	    <label class="col-sm-12 control-label">Product Description</label>
+	    <div class="col-sm-12">
+	      <input type="text" class="form-control" placeholder="product name" value="{{productToUpdate.description}}" ng-model="productToUpdate.description">
+	    </div>
+	    <label class="col-sm-12 control-label">Price</label>
+	    <div class="col-sm-12">
+	      <input type="number" class="form-control" placeholder="price" value="{{productToUpdate.price}}" ng-model="productToUpdate.price">
+	    </div>
+	    <label class="col-sm-12 control-label">Quantity</label>
+	    <div class="col-sm-12">
+	      <input type="number" class="form-control" placeholder="quantity" value="{{productToUpdate.qty}}" ng-model="productToUpdate.qty">
+	    </div>
+	    <label class="col-sm-12 control-label">Category</label>
+	    <div class="col-sm-10">
+	      <select class="form-control" ng-model='$parent.$parent.selectedCategory'>
+	        <option ng-repeat='category in categories' value='{{category.name}}'>{{category.name}}
+	        </option>
+	      </select>
+	    </div>
+	    <div class="col-sm-2">
+	      <button class='btn btn-primary btn-sm' type='button' ng-click="addCategory()">+</button>
+	    </div>
+	    <div class="col-sm-12 category-section">
+	      <ul>
+	        <li class="unstyle col-sm-2 " ng-repeat='category in newProduct.category'>
+	            <button type='button' class='btn btn-danger btn-xs' ng-click='removeCategory(category)'>{{category}}</button>
+	        </li>
+	      </ul>
+	    </div>
+	    <div class="btn-group col-sm-12">
+	      <button type="submit" class="btn btn-primary" ng-click="updateProduct=false">Save</button>
+	      <button type='button' ng-click='updateProduct=!updateProduct' class='btn btn-danger'>Cancel</button>
+	    </div>
+	    <div class='col-sm-12'>
+	      <button type='button' ng-click="productToUpdate.available=!productToUpdate.available" class='btn btn-warning'>{{productToUpdate.available ? "Make Unavailable":"Make Available"}}</button>
+	    </div>
+	  </div>
+	</div>
+</form>
