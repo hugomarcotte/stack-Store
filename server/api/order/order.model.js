@@ -8,6 +8,7 @@ var OrderSchema = new Schema({
   _user: { type: Schema.Types.ObjectId, ref: 'User'},
   guest_user: String,
   _products: [],
+  // cart: {type:Schema.Types.ObjectId,ref: 'Cart'},  //Need cartIds for .populate
   creationDate: {type:Date, default: Date.now() },
   totalPrice: Number,
   stripeId: String

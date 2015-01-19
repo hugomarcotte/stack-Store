@@ -1,11 +1,18 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('CheckoutCtrl', function ($scope, $cookieStore, Order, Auth) {
-    $scope.order = $cookieStore.get('cart');
-    if($scope.order !== undefined && $scope.order.length > 0){
-        $scope.validOrder = true;
+  .controller('CheckoutCtrl', function ($scope, $cookieStore, Order, Auth,CartCookies,Cart) {
+    
+    $scope.findOrder = function(){
+        var cartId = $cookieStore.get('cart');
+        Cart.get({id:cartId},function(result){
+            $scope.order = result;
+            $scope.validOrder = true;
+            ///Error handler?
+        })
     }
+    $scope.findOrder();
+
     $scope.totalPriceCalculator = function(){
     	$scope.totalPrice = 0
     	$scope.order.forEach(function(item){

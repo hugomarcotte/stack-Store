@@ -41,7 +41,8 @@ angular.module('stackStoreApp')
     },
 
   	getCart: function() {
-  		return $cookieStore.get('cart');
+  		var cartId = $cookieStore.get('cart');
+      return Cart.get({id:cartId})
   	},
 
     removeItem : function(productId) {
