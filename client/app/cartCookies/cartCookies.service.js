@@ -34,6 +34,7 @@ angular.module('stackStoreApp')
         var products=[{productId:productId,qty:numToAdd}];
         var newCart ={userId: userId, products: products}
           Cart.save(newCart,function(createdCart){
+            console.log(createdCart, 'working');
             $cookieStore.put('cart',createdCart._id)
           });
       }

@@ -33,6 +33,7 @@ exports.populated = function(req, res) {
 
 // Creates a new cart in the DB.
 exports.create = function(req, res) {
+  console.log(req.body, 'working');
   Cart.create(req.body, function(err, cart) {
     if(err) { return handleError(res, err); }
     return res.json(201, cart);
