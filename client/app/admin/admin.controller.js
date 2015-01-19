@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User, Product, Role,Category ) {
+  .controller('AdminCtrl', function ($scope, $http, Auth, User, Product, Role,Category, Order ) {
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
@@ -72,5 +72,6 @@ angular.module('stackStoreApp')
       var newProduct = $scope.newProduct.category;
       newProduct.splice(newProduct.indexOf(category),1)
     }
+    $scope.orders = Order.query();
 
   })

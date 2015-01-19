@@ -5,7 +5,9 @@ var Order = require('./order.model');
 
 // Get list of orders
 exports.index = function(req, res) {
+  console.log(req.body)
   Order.find(function (err, orders) {
+    console.log("index function")
     if(err) { return handleError(res, err); }
     return res.json(200, orders);
   });
@@ -13,7 +15,7 @@ exports.index = function(req, res) {
 
 // Get a single order
 exports.show = function(req, res) {
-  Order.findById(req.params.id, function (err, order) {
+  Order.find({_user:req.params.id}, function (err, order) {
     if(err) { return handleError(res, err); }
     if(!order) { return res.send(404); }
     return res.json(order);

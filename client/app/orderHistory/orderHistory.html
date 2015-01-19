@@ -1,0 +1,25 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class ="row">
+	<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+		<div ng-show="!orders.length">
+			<h1>You have not placed any orders yet!</h1>
+		</div>
+		<div ng-show="orders.length">
+			<h1>Your Order History</h1>
+			<table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
+				<tr>
+					<td>Order ID</td>
+					<td>Date</td>
+					<td>Total Price</td>
+					<td>View Order Details</td>
+				</tr>
+				<tr ng-repeat="order in orders">
+			  		<td>{{order._id}}</td>
+			  		<td>{{order.creationDate | date}}</td>
+			  		<td>{{order.totalPrice | currency}}</td>
+			  		<td><a href="#">Details</a></td>
+		  		</tr>
+	  		</table>
+		</div>
+	</div>
+</div>

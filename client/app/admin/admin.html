@@ -194,7 +194,22 @@
       </div>
     </tab>
     <tab heading="Orders">
-      Orders
+      <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
+        <tr>
+          <td>Order ID</td>
+          <td>User ID</td>
+          <td>Date</td>
+          <td>Total Price</td>
+          <td>View Order Details</td>
+        </tr>
+        <tr ng-repeat="order in orders">
+            <td>{{order._id}}</td>
+            <td>{{order._user}}</td>
+            <td>{{order.creationDate | date}}</td>
+            <td>{{order.totalPrice | currency}}</td>
+            <td><a href="#">Details</a></td>
+          </tr>
+        </table>
     </tab>
   </tabset>
 
