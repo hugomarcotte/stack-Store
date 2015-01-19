@@ -5,10 +5,12 @@ var mongoose = require('mongoose'),
 var Product = require('../product/product.model');
 
 var OrderSchema = new Schema({
-  _user: { type: Schema.Types.ObjectId, ref: 'User', required: true}, // Link to user
+  _user: { type: Schema.Types.ObjectId, ref: 'User'},
+  guest_user: String,
   _products: [],
   creationDate: {type:Date, default: Date.now() },
-  totalPrice: Number
+  totalPrice: Number,
+  stripeId: String
 });
 
 OrderSchema.pre('save', function(next){

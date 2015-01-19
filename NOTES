@@ -1,0 +1,46 @@
+NOTES:
+
+Promo Code: 
+
+function makeid()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 6; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
+Use generated promocode as you confirm the type of promotion you wish to make.
+
+The promotion tab on ADMIN will allow you to keep track of current promotions and make new ones.
+
+Promotions will be time sensitive lasting a day, a couple of weeks, or a month etc...
+
+Promotions will have date -- calendar available -- also will be able to access whole store / certain categories / certain items and modify them with a promotion key which will be declared to be true or false.
+
+If promotion is true it will have a promo object: 
+
+start: Date
+end: Date
+deal: Number // can modify the price of the item by some percentage%
+code: String // 6 digit letters and numbers
+
+**
+Will be availble to enter PROMO code at checkout to reduce prices on some items.
+If code matches - will apply deal associated with that code.
+
+code will be entered and checked same way password is checked.
+object will be accessed and apply deal on current order.
+**
+
+**
+May have to update cart/order schema to be able to allow this.
+**
+
+MAKE CHANGE TO STARS IN PRODUCT PAGE FOR REVIEW:
+
+EITHER MAKE STARS REQUIRED OR ng-model="stars || 1"
+

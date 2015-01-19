@@ -19,13 +19,18 @@
 	    	<td>Cost</td>
 	    	<td>Remove</td>
 	  	</tr>
-	  	<tr ng-repeat="product in cartOrder">
-			<td class="cart-img"><img class="product-image-thumb" src="{{product.product.image}}"></td>
-	  		<td>{{product.product.name}}</td>
-	  		<td> {{product.product.price | currency: "$ "}}</td>
+	  	<tr ng-show="cartIsEmpty">
+	  		<td colspan="6">
+	  			Your cart is empty!
+	  		</td>
+	  	</tr>
+	  	<tr ng-repeat="product in cart">
+			<td class="cart-img"><img class="product-image-thumb" src="{{product.productId.image}}"></td>
+	  		<td>{{product.productId.name}}</td>
+	  		<td> {{product.productId.price | currency: "$ "}}</td>
 			<td class="cart-qty"><input type="number" class="form-control pull-right" min="1" ng-model="product.qty" ng-change="$parent.isSaved=false"></td>
-	  		<td>{{product.qty * product.product.price | currency: "$ "}}</td>
-	  		<td><span style="cursor: pointer;" class="glyphicon glyphicon-remove" ng-click="removeItem(product)"></span> </td>
+	  		<td>{{product.qty * product.productId.price | currency: "$ "}}</td>
+	  		<td><span style="cursor: pointer;" class="glyphicon glyphicon-remove" ng-click="removeItem(product.productId._id)"></span> </td>
 
 	  	</tr>
 	  	<tr>
@@ -39,6 +44,7 @@
 	<div ng-show="isSaved">
 		Your Cart is saved.
 	</div>
+
 	<div class="button-group" ng-show="cartOrder.length">
   		<button type="submit" class="btn btn-primary">Save</button>
   		<a href="/checkout"><button type="button" class="btn btn-danger">Checkout</button></a>
