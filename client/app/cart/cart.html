@@ -1,11 +1,15 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="col-md-12">
-	<div style="text-align: center;">
-		<h1>My Cart</h1>
+	<div class="cart-container">
+		<div ng-show="!cartOrder.length">
+			<h1>Empty Cart!</h1>
+			<img class="cart-img" src="http://stephenplusplus.github.io/yeoman.io/assets/img/yeoman-009.png"><br>
+			<a href="/"><button class="btn btn-danger">Add things to your cart!</button></a>
+		</div>
+		<h1 ng-show="cartOrder.length">My Cart</h1>
 	</div>
-	<br>
 	<form name="cart" ng-submit='cartUpdate()'>
-	<div class="panel panel-default">
+	<div class="panel panel-default" ng-show="cartOrder.length">
 	  <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
 	  	<tr>
 			<td></td>
@@ -40,10 +44,13 @@
 	<div ng-show="isSaved">
 		Your Cart is saved.
 	</div>
-	<div class="button-group">
+
+	<div class="button-group" ng-show="cartOrder.length">
   		<button type="submit" class="btn btn-primary">Save</button>
-  		<a href="/checkout"<button type="button" class="btn btn-danger">Checkout</button></a>
+  		<a href="/checkout"><button type="button" class="btn btn-danger">Checkout</button></a>
+  		<a href="/"><button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping!</button></a>
 	</div>
 	</form>
 </div>
+<div class="col-sm-12" ng-include="'components/footer/footer.html'"></div>
 
