@@ -33,10 +33,7 @@ exports.populated = function(req, res) {
 
 // Creates a new cart in the DB.
 exports.create = function(req, res) {
-  console.log('REQ ',req.body)
   Cart.create(req.body, function(err, cart) {
-    console.log('ERROR ',err)
-    console.log('cart ',cart)
     if(err) { return handleError(res, err); }
     return res.json(201, cart);
   });
@@ -46,10 +43,14 @@ exports.create = function(req, res) {
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
   Cart.findById(req.params.id, function (err, cart) {
+    console.log('Cart ',cart)
+    console.log('req.body ',req.body)
     if (err) { return handleError(res, err); }
     if(!cart) { return res.send(404); }
     var updated = _.extend(cart,req.body)
     updated.save(function (err) {
+      console.log('UPDATEd ',updated)
+
       if (err) { return handleError(res, err); }
       return res.json(200, cart);
     });
