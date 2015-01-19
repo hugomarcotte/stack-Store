@@ -6,12 +6,7 @@ angular.module('stackStoreApp')
     
     Cart.cartPage({id:cartId},function(results){
       $scope.cart = results.products;
-      console.log('Cart' ,$scope.cart)
-      var countProducs
-
-
-
-
+      // var countProducs
     });
     $scope.isSaved = false;
 

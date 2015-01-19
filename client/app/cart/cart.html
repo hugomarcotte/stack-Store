@@ -1,7 +1,7 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="col-md-12">
 	<div style="text-align: center;">
-		<h1>My Cart</h1>{{cart}}
+		<h1>My Cart</h1>
 	</div>
 	<br>
 	<form name="cart" ng-submit='cartUpdate()'>
@@ -21,11 +21,11 @@
 	  		</td>
 	  	</tr>
 	  	<tr ng-repeat="product in cart">
-			<td class="cart-img"><img class="product-image-thumb" src="{{product.image}}"></td>
-	  		<td>{{product.name}}</td>
-	  		<td> {{product.price | currency: "$ "}}</td>
+			<td class="cart-img"><img class="product-image-thumb" src="{{product.productId.image}}"></td>
+	  		<td>{{product.productId.name}}</td>
+	  		<td> {{product.productId.price | currency: "$ "}}</td>
 			<td class="cart-qty"><input type="number" class="form-control pull-right" min="1" ng-model="product.qty" ng-change="$parent.isSaved=false"></td>
-	  		<td>{{product.qty * product.price | currency: "$ "}}</td>
+	  		<td>{{product.qty * product.productId.price | currency: "$ "}}</td>
 	  		<td><span style="cursor: pointer;" class="glyphicon glyphicon-remove" ng-click="removeItem(product)"></span> </td>
 
 	  	</tr>
