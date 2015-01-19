@@ -30,7 +30,10 @@ angular.module('stackStoreApp')
         })
 
       } else {
-        var userId = Auth.getCurrentUser()._id;
+        var userId = Auth.getCurrentUser()._id || parseInt(Math.random()*1000000)+'-fake';
+        //Might also need to generate another cookie with the fake user Id
+        //depends on the rest of the controllers
+        console.log('USERID ',userId)
         var products=[{productId:productId,qty:numToAdd}];
         var newCart ={userId: userId, products: products}
           Cart.save(newCart,function(createdCart){
