@@ -1,0 +1,13 @@
+<div class="review-box">
+	<form name='reviewForm' ng-submit="submitReview(product._id,reviewText, stars)">
+		<div class='form-group'>
+			<div>
+		    <rating ng-model="stars" max="5" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+			</div>
+			<textarea class="form-control custom-control" rows="3" cols="150" placeholder='Min 10 characters' ng-model='reviewText' ng-minlength="10" ng-required="true"></textarea>
+			<br>
+			<button class='btn btn-primary btn-xs' ng-click="writeReview = !writeReview" ng-disabled="reviewForm.$invalid">Submit</button>
+			<button type='button' class='btn btn-danger btn-xs' ng-show='writeReview'ng-click="writeReview = !writeReview">Cancel</button>
+		</div>
+	</form>
+</div>
