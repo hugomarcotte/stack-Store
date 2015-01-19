@@ -14,6 +14,15 @@ var ProductSchema = new Schema({
 	image: {type: String, default: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"}
 });
 
+
+ProductSchema.statics.nameSearch = function(name) {
+    return this.find({name: {$regex: name, $options:"$i"}});
+};
+
+ProductSchema.statics.categorySearch = function(category) {
+    return this.find({category: {$regex: category, $options:"$i"}});
+};
+
 ProductSchema.methods.addReview = function(productId, reviewId){
 	this.review.push(reviewId);
 	this.save();
@@ -32,4 +41,5 @@ ProductSchema.methods.updateQuantity = function(quantity){
 	this.qty -= quantity;
 	this.save();
 }
+>>>>>>> master
 module.exports = mongoose.model('Product', ProductSchema);
