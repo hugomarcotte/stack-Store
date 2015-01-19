@@ -22,7 +22,6 @@ exports.show = function(req, res) {
 };
 
 exports.search = function(req, res) {
-  console.log(req.params)
   Product
     .categorySearch(req.params.category)
     .exec(function(err, products) {
