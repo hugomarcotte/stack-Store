@@ -40,7 +40,7 @@
 	<div ng-show="isSaved">
 		Your Cart is saved.
 	</div>
-	<div class="button-group">
+	<div ng-hide="cartIsEmpty" class="button-group">
   		<button type="submit" class="btn btn-primary">Save</button>
   		<a href="/checkout"<button type="button" class="btn btn-danger">Checkout</button></a>
 	</div>
