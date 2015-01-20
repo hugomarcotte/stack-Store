@@ -59,9 +59,6 @@ angular.module('stackStoreApp')
       })
 
       // $cookieStore.put('cart', currentOrder)
-    },
-    clearCart: function(){
-
     }
 
 

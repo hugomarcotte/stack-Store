@@ -8,7 +8,7 @@
 		</div>
 		<h1 ng-show="cart.length">My Cart</h1>
 	</div>
-	<form name="cart" ng-submit='cartUpdate()'>
+	<form name="cart" ng-submit='cartUpdate(cart)'>
 	<div class="panel panel-default" ng-show="cart.length">
 	  <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
 	  	<tr>

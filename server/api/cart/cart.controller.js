@@ -43,16 +43,13 @@ exports.create = function(req, res) {
 // Updates an existing cart in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  console.log('UPDATE REQ ',req.body)
   Cart.findById(req.params.id, function (err, cart) {
     if (err) { return handleError(res, err); }
     if(!cart) { return res.send(404); }
-    var updated = _.extend(cart,req.body)
+    var updated = _.extend(cart, req.body)
     updated.save(function (err) {
-      // console.log('UPDATEd ',updated)
-
       if (err) { return handleError(res, err); }
-      return res.json(200, cart);
+      return res.json(200, {cart: cart, updated: updated});
     });
   });
 };
