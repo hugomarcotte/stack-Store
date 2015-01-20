@@ -4,11 +4,21 @@ var _ = require('lodash');
 var Order = require('./order.model');
 
 // Get list of orders
+// exports.index = function(req, res) {
+//   Order.find(function (err, orders) {
+//     if(err) { return handleError(res, err); }
+//     return res.json(200, orders);
+//   });
+// };
+
 exports.index = function(req, res) {
-  Order.find(function (err, orders) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, orders);
-  });
+  Order
+    .find()
+    .populate('_user')
+    .exec(function(err, orders) {
+      if(err) { return handleError(res, err); }
+      return res.json(200, orders);
+    });
 };
 
 // Get a single order
