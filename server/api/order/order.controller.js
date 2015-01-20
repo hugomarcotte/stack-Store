@@ -29,6 +29,15 @@ exports.show = function(req, res) {
   });
 };
 
+//get orders for a specific user Id
+exports.user = function(req, res){
+  Order.find({_user: req.params.userId}, function(err, order){
+    if(err) { return handleError(res, err); }
+    if(!order) { return res.send(404); }
+    return res.json(order);
+  });
+};
+
 // Creates a new order in the DB.
 exports.create = function(req, res) {
   Order.create(req.body, function(err, order) {

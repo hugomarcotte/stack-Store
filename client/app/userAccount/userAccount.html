@@ -1,0 +1,9 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1">
+	<h1>My Account</h1>
+	<h2>Email: {{email}}</h2>
+	<button class="btn btn-primary" ng-click="getOrders()">View Order History</button>
+	<p>{{orders}}</p>
+	</div>
+</div>
