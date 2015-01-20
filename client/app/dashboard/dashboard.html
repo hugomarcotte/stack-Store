@@ -1,0 +1,14 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="col-md-12">
+  <ul>
+    <li ng-repeat="page in stats">
+      <div>
+        Date: {{page.date.toDateString()}}
+        <br>Page:{{page.page}}
+        <hr>
+      </div>
+      <div>
+      </div>
+    </li>
+  </ul>
+</div>

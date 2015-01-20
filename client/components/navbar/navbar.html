@@ -16,6 +16,7 @@
         </li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
         <li ng-show="!isAdmin()&&isLoggedIn()"><a href="/userAccount">Account</a></li>
+        <li ng-show="isAdmin()" ng-class="{active: isActive('/dashboard')}"><a href="/dashboard">Dashboard</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
