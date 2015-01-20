@@ -3,22 +3,53 @@
 	<div class="col-lg-6 col-sm-6 col-md-6" ng-hide="validOrder">
 		<h1>You have no items to check out!</h1>
 	</div>
-	<div class="col-lg-6 col-sm-6 col-md-6" ng-show="validOrder">
-		<h1>Checkout</h1>
-		<div><a href="/cart"><button class="btn btn-primary" style="margin: 10px;">Edit Cart</button></a></div>
-		<ul class="list-group">
+	<div class="col-lg-6 col-sm-12 col-md-8" ng-show="validOrder">
+		
+		<div><h1>Checkout<a href="/cart"><button class="btn btn-primary" style="margin: 10px;">Edit Cart</button></a></h1></div>
+	<!-- 	<ul class="list-group">
 	      <li class="list-group-item" ng-repeat="item in order.products"> 
 	          <img class="cart-img" src="{{item.productId.image}}">
 	          <br>
 	          <b>{{item.productId.name}}</b>
-	          <p>{{item.productId.price | currency}}</p>
+	          <p>{{item.productId.price/100 | currency}}</p>
 	          <p>Quantity: {{item.qty}}</p>
 	      </li>
 	    </ul>
+
+	    <div class="panel panel-default" ng-show="cart.length"> -->
+		  <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
+		  	<tr>
+				<td></td>
+		    	<td>Item</td>
+		    	<td>Price</td>
+		    	<td>Quantity</td>
+		    	<td>Cost</td>
+		  	</tr>
+		  	<tr ng-show="cartIsEmpty">
+		  		<td colspan="6">
+		  			Your cart is empty!
+		  		</td>
+		  	</tr>
+		  	<tr ng-repeat="product in order.products">
+				<td class="cart-img"><img class="product-image-thumb" src="{{product.productId.image}}"></td>
+		  		<td>{{product.productId.name}}</td>
+		  		<td> {{product.productId.price/100 | currency: "$ "}}</td>
+				<td class="cart-qty">{{product.qty}}</td>
+		  		<td>{{product.qty * product.productId.price/100 | currency: "$ "}}</td>
+
+		  	</tr>
+		  	<tr>
+		  		<td colspan="4"></td>
+		  		<td colspan="2"></td>
+		  	</tr>		  	
+		  </table>
+
 	</div>
-	<div class="col-lg-6 col-sm-6 col-md-6" ng-show="validOrder">
-		<h1>Total: {{totalPrice |currency}}</h1>
-		<h2>Enter Credit Card Information: </h2>
+	<div class="col-lg-2 col-sm-12" ng-show="validOrder">
+	</div>
+	<div class="col-lg-4 col-sm-12 col-md-4" ng-show="validOrder">
+		<div class="row"><h1>Total: {{totalPrice/100 |currency}}</h1></div>
+		<div class="row"><h3>Pay Here</h3><h5>Enter credit card information below:</h5>
 
 		<form class="form-group" id="payment-form" ng-submit="submitPayment(stripe_number, stripe_cvc, exp_month, exp_year)">
 		  <span class="payment-errors"></span>
@@ -48,7 +79,7 @@
 
 		  <button class="btn btn-primary" style="margin: 10px;" ng-disabled="payed">Submit Payment</button>
 		</form>
-		
+		</div>
 	</div>
 </div>
 
