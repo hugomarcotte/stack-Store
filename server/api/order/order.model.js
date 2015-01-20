@@ -11,7 +11,7 @@ var OrderSchema = new Schema({
   // cart: {type:Schema.Types.ObjectId,ref: 'Cart'},  //Need cartIds for .populate
   creationDate: {type:Date, default: Date.now() },
   totalPrice: Number,
-  stripeId: String
+  stripeInfo: Object
 });
 
 OrderSchema.pre('save', function(next){

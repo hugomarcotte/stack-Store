@@ -20,6 +20,18 @@ exports.show = function(req, res) {
   });
 };
 
+// exports.show = function(req, res) {
+//   Cart
+//     .findById(req.params.id)
+//     //.populate('products.productId')
+//     .exec(function(err, cart){
+//       console.log(cart);
+//       if(err) { return handleError(res, err); }
+//       if(!cart) { return res.send(404); }
+//       return res.json(cart);
+//     })
+// };
+
 //Populate for the Cart page
 exports.populated = function(req, res) {
   Cart.findById(req.params.id)

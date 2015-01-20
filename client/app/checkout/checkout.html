@@ -7,17 +7,17 @@
 		<h1>Checkout</h1>
 		<div><a href="/cart"><button class="btn btn-primary" style="margin: 10px;">Edit Cart</button></a></div>
 		<ul class="list-group">
-	      <li class="list-group-item" ng-repeat="item in order"> {{item}}
-	          <img class="cart-img" src="{{item.product.image}}">
+	      <li class="list-group-item" ng-repeat="item in order.products"> 
+	          <img class="cart-img" src="{{item.productId.image}}">
 	          <br>
-	          <b>{{item.product.name}}</b>
-	          <p>{{item.product.price | currency}}</p>
+	          <b>{{item.productId.name}}</b>
+	          <p>{{item.productId.price | currency}}</p>
 	          <p>Quantity: {{item.qty}}</p>
 	      </li>
 	    </ul>
 	</div>
 	<div class="col-lg-6 col-sm-6 col-md-6" ng-show="validOrder">
-		<h1>Total: {{totalPriceCalculator() |currency}}</h1>
+		<h1>Total: {{totalPrice |currency}}</h1>
 		<h2>Enter Credit Card Information: </h2>
 
 		<form class="form-group" id="payment-form" ng-submit="submitPayment(stripe_number, stripe_cvc, exp_month, exp_year)">
