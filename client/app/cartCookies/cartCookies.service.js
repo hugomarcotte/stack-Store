@@ -30,7 +30,8 @@ angular.module('stackStoreApp')
         })
 
       } else {
-        var userId = Auth.getCurrentUser()._id;
+        var userId = Auth.getCurrentUser()._id || parseInt(Math.random()*10000000)+'-fake';
+        //Not a great fake Id, but we'll never have 10m users
         var products=[{productId:productId,qty:numToAdd}];
         var newCart ={userId: userId, products: products}
           Cart.save(newCart,function(createdCart){
