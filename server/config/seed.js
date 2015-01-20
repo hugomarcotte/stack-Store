@@ -9,6 +9,7 @@ var User = require('../api/user/user.model');
 var Product = require('../api/product/product.model');
 var Category = require('../api/category/category.model');
 var Role = require('../api/role/role.model');
+var Promotion = require('../api/promotion/promotion.model');
 
 Product.find({}).remove(function() {
   Product.create({
@@ -102,7 +103,7 @@ Category.find({}).remove(function(){
       console.log('Populated Categories')
     }
   )
-})
+});
 
 Role.find({}).remove(function(){
   Role.create(
@@ -112,5 +113,101 @@ Role.find({}).remove(function(){
       console.log('Populated Roles')
     }
   )
-})
+});
 
+Role.find({}).remove(function(){
+  Role.create(
+    {role: 'admin'},
+    {role: 'user'},
+    function(){
+      console.log('Populated Roles')
+    }
+  )
+});
+
+Promotion.find({}).remove(function(){
+  Promotion.create(
+    {code: 'promo10',
+    startDate: Date.now(),
+    endDdate: new Date('Tue Jan 30 2015'),
+    percentOff: 10,
+    active: true
+    },
+    function(){
+      console.log('Populated Promotions')
+    }
+  )
+});
+
+
+Analytic.find({}).remove(function(){
+  Analytic.create(
+    {
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 1 2015')
+    },
+    {
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 2 2015')
+    },{
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 3 2015')
+    },{
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 4 2015')
+    },{
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 5 2015')
+    },{
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 6 2015')
+    },{
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 7 2015')
+    },{
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 8 2015')
+    },{
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 9 2015')
+    },{
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 10 2015')
+    },{
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 11 2015')
+    },{
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 12 2015')
+    },{
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 13 2015')
+    },{
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 14 2015')
+    },
+    {
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 15 2015')
+    },
+    {
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 16 2015')
+    },
+    {
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 17 2015')
+    },
+    {
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 18 2015')
+    },
+    {
+      page : {"productPage" : Math.random()*100, "mainPage" : Math.random()*100},
+      date : new Date('Tue Jan 19 2015')
+    },
+    function(){
+      console.log('Populated Analytic')
+    }
+  )
+});
