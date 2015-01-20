@@ -1,3 +1,13 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
 <div class="col-md-12">
-This is the dashboard view.
+  <ul>
+    <li ng-repeat="page in stats">
+      <div>
+        Page:{{page.page}}
+      </div>
+      <div>
+        Hits: {{page.hits}}
+      </div>
+    </li>
+  </ul>
 </div>
