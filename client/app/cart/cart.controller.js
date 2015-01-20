@@ -29,8 +29,8 @@ angular.module('stackStoreApp')
           _id: item._id,
           qty: item.qty
         })
-      })
-      console.log(currentCart);
+      });
+
     	Cart.updateCart({id: cartId}, {products: currentCart});
     	$scope.isSaved = true;
     };
