@@ -1,49 +1,294 @@
-<div ng-hide="updateOrder">
-  <h3>Order Log</h3>
-    <ul class="list-group">
-      <button type="button" class="list-group-item order-item" ng-repeat="o in orderHistory" ng-click="$parent.updateOrder=true; $parent.viewOrder=true; $parent.orderDetails=o._products; $parent.orderNumber=o._id">
-        <strong class="pull-left">{{o._id}}</strong>
-        <br>
-        <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
-        <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>
-        <br>
-        <span class='pull-right text-muted'>{{o.totalPrice | currency: '$ '}}</span>
-        <span class='text-muted pull-left'>Status: {{o.status}}</span>
-      </button>
-    </ul>
-</div>
-
-<div ng-show="viewOrder">
-    <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
-      <tr>
-        <h4>Order #: {{orderNumber}}</h4>
-      </tr>
-      <tr>
-      <td></td>
-        <td>Item</td>
-        <td>Price</td>
-        <td>Quantity</td>
-        <td>Cost</td>
-        <td>Remove</td>
-      </tr>
-      <tr ng-repeat="od in orderDetails">
-      <td class="cart-img"><img class="product-image-thumb" src="{{od.product.image}}"></td>
-        <td>{{od.product.description}}</td>
-        <td> {{od.product.price | currency: "$ "}}</td>
-      <td class="cart-qty"><input type="number" class="form-control pull-right" min="1" ng-model="od.product.qty" ng-change="$parent.isSaved=false"></td>
-        <td>{{od.product.qty * od.product.price | currency: "$ "}}</td>
-        <td><span style="cursor: pointer;" class="glyphicon glyphicon-remove" ng-click="removeItem(product.productId._id)"></span> </td>
-      </tr>
-      <tr>
-        <td colspan="4"></td>
-        <td><b>{{}}</b></td>
-        <td colspan="2"></td>
-      </tr>       
-    </table>
-    <div class="btn-group col-sm-12">
-      <button type="button" class="btn btn-primary pull-right" ng-click="updateOrder=false; viewOrder=false">Update
-      </button>
-      <button type="button" class="btn btn-danger pull-right" ng-click="updateOrder=false; viewOrder=false">Cancel
-      </button>
+<tabset>
+  <tab heading="All Orders" ng-hide="updateOrder">
+    <div ng-hide="updateOrder">
+      <h3>Order Log</h3>
+        <ul class="list-group">
+          <button type="button" class="list-group-item order-item" ng-repeat="o in orderHistory" ng-click="$parent.updateOrder=true; $parent.viewOrder=true; $parent.orderDetails=o">
+            <strong class="pull-left">{{o._id}}</strong>
+            <br>
+            <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
+            <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>
+            <br>
+            <span class='pull-right text-muted'>{{o.totalPrice | currency: '$ '}}</span>
+            <span class='text-muted pull-left'>Status: {{o.status}}</span>
+            <br>
+        </ul>
     </div>
-</div>
+
+    <div ng-show="viewOrder">
+        <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
+          <tr>
+            <h4>Order #: {{orderDetails._id}}</h4>
+            <div class="dropdown">
+              Status: 
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                {{orderDetails.status}}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Open'; updateOrderStatus(orderDetails)">Open</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Processing'; updateOrderStatus(orderDetails)">Processing</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Cancelled'; updateOrderStatus(orderDetails)">Cancelled</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Completed'; updateOrderStatus(orderDetails)">Completed</a></li>
+              </ul>
+            </div>
+          </tr>
+          <tr>
+          <td></td>
+            <td>Item</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Cost</td>
+          </tr>
+          <tr ng-repeat="od in orderDetails._products">
+          <td class="cart-img"><img class="product-image-thumb" src="{{od.product.image}}"></td>
+            <td>{{od.product.description}}</td>
+            <td> {{od.product.price | currency: "$ "}}</td>
+          <td class="cart-qty">{{od.product.qty}}</td>
+            <td>{{od.product.qty * od.product.price | currency: "$ "}}</td>
+          </tr>
+          <tr>
+            <td colspan="4"></td>
+            <td><b>{{}}</b></td>
+          </tr>       
+        </table>
+        <div class="btn-group col-sm-10">
+          <button type="button" class="btn btn-danger" ng-click="updateOrder=false; viewOrder=false">Back
+          </button>
+        </div>
+    </div>
+  </tab>
+  <tab heading="Open" ng-hide="updateOrder">
+    <div ng-hide="updateOrder">
+      <h3>Open Orders</h3>
+        <ul class="list-group">
+          <button type="button" class="list-group-item order-item" ng-repeat="o in orderHistory | filter:{status:'Open'}" ng-click="$parent.updateOrder=true; $parent.viewOrder=true; $parent.orderDetails=o">
+            <strong class="pull-left">{{o._id}}</strong>
+            <br>
+            <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
+            <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>
+            <br>
+            <span class='pull-right text-muted'>{{o.totalPrice | currency: '$ '}}</span>
+            <span class='text-muted pull-left'>Status: {{o.status}}</span>
+            <br>
+        </ul>
+    </div>
+    <div ng-show="viewOrder">
+        <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
+          <tr>
+            <h4>Order #: {{orderDetails._id}}</h4>
+            <div class="dropdown">
+              Status: 
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                {{orderDetails.status}}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Open'; updateOrderStatus(orderDetails)">Open</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Processing'; updateOrderStatus(orderDetails)">Processing</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Cancelled'; updateOrderStatus(orderDetails)">Cancelled</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Completed'; updateOrderStatus(orderDetails)">Completed</a></li>
+              </ul>
+            </div>
+          </tr>
+          <tr>
+          <td></td>
+            <td>Item</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Cost</td>
+          </tr>
+          <tr ng-repeat="od in orderDetails._products">
+          <td class="cart-img"><img class="product-image-thumb" src="{{od.product.image}}"></td>
+            <td>{{od.product.description}}</td>
+            <td> {{od.product.price | currency: "$ "}}</td>
+          <td class="cart-qty">{{od.product.qty}}</td>
+            <td>{{od.product.qty * od.product.price | currency: "$ "}}</td>
+          </tr>
+          <tr>
+            <td colspan="4"></td>
+            <td><b>{{}}</b></td>
+          </tr>       
+        </table>
+        <div class="btn-group col-sm-10">
+          <button type="button" class="btn btn-danger" ng-click="updateOrder=false; viewOrder=false">Back
+          </button>
+        </div>
+    </div>
+  </tab>
+  <tab heading="Processing" ng-hide="updateOrder">
+    <div ng-hide="updateOrder">
+      <h3>Orders in Process</h3>
+        <ul class="list-group">
+          <button type="button" class="list-group-item order-item" ng-repeat="o in orderHistory | filter:{status:'Processing'}" ng-click="$parent.updateOrder=true; $parent.viewOrder=true; $parent.orderDetails=o">
+            <strong class="pull-left">{{o._id}}</strong>
+            <br>
+            <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
+            <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>
+            <br>
+            <span class='pull-right text-muted'>{{o.totalPrice | currency: '$ '}}</span>
+            <span class='text-muted pull-left'>Status: {{o.status}}</span>
+            <br>
+        </ul>
+    </div>
+    <div ng-show="viewOrder">
+        <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
+          <tr>
+            <h4>Order #: {{orderDetails._id}}</h4>
+            <div class="dropdown">
+              Status: 
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                {{orderDetails.status}}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Open'; updateOrderStatus(orderDetails)">Open</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Processing'; updateOrderStatus(orderDetails)">Processing</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Cancelled'; updateOrderStatus(orderDetails)">Cancelled</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Completed'; updateOrderStatus(orderDetails)">Completed</a></li>
+              </ul>
+            </div>
+          </tr>
+          <tr>
+          <td></td>
+            <td>Item</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Cost</td>
+          </tr>
+          <tr ng-repeat="od in orderDetails._products">
+          <td class="cart-img"><img class="product-image-thumb" src="{{od.product.image}}"></td>
+            <td>{{od.product.description}}</td>
+            <td> {{od.product.price | currency: "$ "}}</td>
+          <td class="cart-qty">{{od.product.qty}}</td>
+            <td>{{od.product.qty * od.product.price | currency: "$ "}}</td>
+          </tr>
+          <tr>
+            <td colspan="4"></td>
+            <td><b>{{}}</b></td>
+          </tr>       
+        </table>
+        <div class="btn-group col-sm-10">
+          <button type="button" class="btn btn-danger" ng-click="updateOrder=false; viewOrder=false">Back
+          </button>
+        </div>
+    </div>
+  </tab>
+  <tab heading="Cancelled" ng-hide="updateOrder">
+    <div ng-hide="updateOrder">
+      <h3>Cancelled Orders</h3>
+        <ul class="list-group">
+          <button type="button" class="list-group-item order-item" ng-repeat="o in orderHistory | filter:{status: 'Cancelled'}" ng-click="$parent.updateOrder=true; $parent.viewOrder=true; $parent.orderDetails=o">
+
+            <strong class="pull-left">{{o._id}}</strong>
+            <br>
+            <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
+            <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>
+            <br>
+            <span class='pull-right text-muted'>{{o.totalPrice | currency: '$ '}}</span>
+            <span class='text-muted pull-left'>Status: {{o.status}}</span>
+            <br>
+        </ul>
+    </div>
+    <div ng-show="viewOrder">
+        <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
+          <tr>
+            <h4>Order #: {{orderDetails._id}}</h4>
+            <div class="dropdown">
+              Status: 
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                {{orderDetails.status}}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Open'; updateOrderStatus(orderDetails)">Open</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Processing'; updateOrderStatus(orderDetails)">Processing</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Cancelled'; updateOrderStatus(orderDetails)">Cancelled</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Completed'; updateOrderStatus(orderDetails)">Completed</a></li>
+              </ul>
+            </div>
+          </tr>
+          <tr>
+          <td></td>
+            <td>Item</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Cost</td>
+          </tr>
+          <tr ng-repeat="od in orderDetails._products">
+          <td class="cart-img"><img class="product-image-thumb" src="{{od.product.image}}"></td>
+            <td>{{od.product.description}}</td>
+            <td> {{od.product.price | currency: "$ "}}</td>
+          <td class="cart-qty">{{od.product.qty}}</td>
+            <td>{{od.product.qty * od.product.price | currency: "$ "}}</td>
+          </tr>
+          <tr>
+            <td colspan="4"></td>
+            <td><b>{{}}</b></td>
+          </tr>       
+        </table>
+        <div class="btn-group col-sm-10">
+          <button type="button" class="btn btn-danger" ng-click="updateOrder=false; viewOrder=false">Back
+          </button>
+        </div>
+    </div>
+  </tab>
+  <tab heading="Completed" ng-hide="updateOrder">
+    <div ng-hide="updateOrder">
+      <h3>Completed Orders</h3>
+        <ul class="list-group">
+          <button type="button" class="list-group-item order-item" ng-repeat="o in orderHistory | filter:{status:'Completed'}" ng-click="$parent.updateOrder=true; $parent.viewOrder=true; $parent.orderDetails=o">
+            <strong class="pull-left">{{o._id}}</strong>
+            <br>
+            <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
+            <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>
+            <br>
+            <span class='pull-right text-muted'>{{o.totalPrice | currency: '$ '}}</span>
+            <span class='text-muted pull-left'>Status: {{o.status}}</span>
+            <br>
+        </ul>
+    </div>
+    <div ng-show="viewOrder">
+        <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
+          <tr>
+            <h4>Order #: {{orderDetails._id}}</h4>
+            <div class="dropdown">
+              Status: 
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                {{orderDetails.status}}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Open'; updateOrderStatus(orderDetails)">Open</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Processing'; updateOrderStatus(orderDetails)">Processing</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Cancelled'; updateOrderStatus(orderDetails)">Cancelled</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="orderDetails.status='Completed'; updateOrderStatus(orderDetails)">Completed</a></li>
+              </ul>
+            </div>
+          </tr>
+          <tr>
+          <td></td>
+            <td>Item</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Cost</td>
+          </tr>
+          <tr ng-repeat="od in orderDetails._products">
+          <td class="cart-img"><img class="product-image-thumb" src="{{od.product.image}}"></td>
+            <td>{{od.product.description}}</td>
+            <td> {{od.product.price | currency: "$ "}}</td>
+          <td class="cart-qty">{{od.product.qty}}</td>
+            <td>{{od.product.qty * od.product.price | currency: "$ "}}</td>
+          </tr>
+          <tr>
+            <td colspan="4"></td>
+            <td><b>{{}}</b></td>
+          </tr>       
+        </table>
+        <div class="btn-group col-sm-10">
+          <button type="button" class="btn btn-danger" ng-click="updateOrder=false; viewOrder=false">Back
+          </button>
+        </div>
+    </div>
+  </tab>
+</tabset>

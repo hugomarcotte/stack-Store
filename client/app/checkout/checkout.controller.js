@@ -46,7 +46,7 @@ angular.module('stackStoreApp')
     	Order.save({_products:products,
     		 _user:user||null,
              guest_user: guestUser||null,
-    		 creationDate:date, 
+    		 creationDate:date,
     		 totalPrice: totalPrice,
              stripeInfo: stripeResponse
             },function(){ 

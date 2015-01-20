@@ -91,4 +91,11 @@ angular.module('stackStoreApp')
       })
       return total;
     }
+
+    $scope.updateOrderStatus = function(order) {
+      console.log(order)
+      Order.updateOrder({id: order._id}, order);
+    }
+
+
   })
