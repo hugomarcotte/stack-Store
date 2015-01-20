@@ -22,7 +22,7 @@
                   <div ng-show='!userForm.$valid && !!userForm.$error.validator && !userForm.confirm_password.$pristine'><span style='color:red'>Passwords Don't Match</span>
                   </div>
               </div>
-              
+
               <div class='form-group'>
                 <label>Permissions</label>
                 <select ng-model='userToUpdate.role'>
@@ -40,10 +40,10 @@
           <li class="list-group-item" ng-repeat="user in users">
             <span>
               <strong>{{user.name}}</strong>
-              <a ng-click="$parent.updateUser=true; $parent.userToUpdate=user"><span class="glyphicon glyphicon-wrench pull-right"></a>
+              <a style="cursor:pointer" ng-click="$parent.updateUser=true; $parent.userToUpdate=user"><span class="glyphicon glyphicon-wrench pull-right"></a>
             </span> <br>
             <span class="text-muted">{{user.email}}</span>
-            <a ng-click="deleteUser(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a><br>
+            <a style="cursor:pointer" ng-click="deleteUser(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a><br>
             <span class='text-muted'>Permissions: {{user.role}}</span>
           </li>
         </ul>
@@ -53,10 +53,10 @@
       <button class='btn btn-primary' ng-show='!updateProduct && !addProduct' ng-click='addProduct = true' >Add Product</button>
 
        <!------- Add Product View ---->
-      
+
       <div ng-show='addProduct'><h3>Add New Product</h3>
         <add-product></add-product>
-      </div>  
+      </div>
       <!------- End Add Product View ---->
 
       <!---- Update Product View ------>
@@ -69,12 +69,12 @@
         <ul class="list-group">
           <li  class="list-group-item" ng-repeat="product in products" ng-class="{unavailable:!product.available}">
             <span>
-              <strong>{{product.name}}</strong> - {{product.available ? "Available":"Unvailable"}} 
-              <a ng-click="$parent.updateProduct=true; $parent.productToUpdate=product"><span class="glyphicon glyphicon-wrench pull-right"></a>
+              <strong>{{product.name}}</strong> - {{product.available ? "Available":"Unvailable"}}
+              <a style="cursor:pointer" ng-click="$parent.updateProduct=true; $parent.productToUpdate=product"><span class="glyphicon glyphicon-wrench pull-right"></a>
             </span>
             <br>
             <span class="text-muted">{{product.description}}</span>
-            <a ng-click="deleteProduct(product)" class="trash">
+            <a style="cursor:pointer" ng-click="deleteProduct(product)" class="trash">
               <span class="glyphicon glyphicon-trash pull-right"> </span>
             </a>
             <br>
