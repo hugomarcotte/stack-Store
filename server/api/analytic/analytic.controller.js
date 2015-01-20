@@ -23,10 +23,14 @@ exports.show = function(req, res) {
 // Creates a new analytic in the DB.
 exports.create = function(req, res) {
   var ping = JSON.parse(req.body.json);
-  Analytic.create({page:ping}, function(err, analytic) {
+  if(Object.keys(ping).length){
+    Analytic.create({page:ping}, function(err, analytic) {
     if(err) { console.log(err); return handleError(res, err); }
     return res.json(201, analytic);
-  });
+  })} 
+  else{
+    res.status(200).send();
+  }
 };
 
 // Updates an existing analytic in the DB.
