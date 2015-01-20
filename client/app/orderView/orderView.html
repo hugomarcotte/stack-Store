@@ -9,7 +9,7 @@
             <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
             <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>
             <br>
-            <span class='pull-right text-muted'>{{o.totalPrice | currency: '$ '}}</span>
+            <span class='pull-right text-muted'>{{o.totalPrice/100 | currency: '$ '}}</span>
             <span class='text-muted pull-left'>Status: {{o.status}}</span>
             <br>
         </ul>
@@ -43,9 +43,9 @@
           <tr ng-repeat="od in orderDetails._products">
           <td class="cart-img"><img class="product-image-thumb" src="{{od.product.image}}"></td>
             <td>{{od.product.description}}</td>
-            <td> {{od.product.price | currency: "$ "}}</td>
-          <td class="cart-qty">{{od.product.qty}}</td>
-            <td>{{od.product.qty * od.product.price | currency: "$ "}}</td>
+            <td> {{od.product.price/100 | currency: "$ "}}</td>
+          <td class="cart-qty">{{od.quantity}}</td>
+            <td>{{od.quantity * (od.product.price/100) | currency: "$ "}}</td>
           </tr>
           <tr>
             <td colspan="4"></td>
@@ -68,7 +68,7 @@
             <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
             <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>
             <br>
-            <span class='pull-right text-muted'>{{o.totalPrice | currency: '$ '}}</span>
+            <span class='pull-right text-muted'>{{o.totalPrice/100 | currency: '$ '}}</span>
             <span class='text-muted pull-left'>Status: {{o.status}}</span>
             <br>
         </ul>
@@ -101,9 +101,9 @@
           <tr ng-repeat="od in orderDetails._products">
           <td class="cart-img"><img class="product-image-thumb" src="{{od.product.image}}"></td>
             <td>{{od.product.description}}</td>
-            <td> {{od.product.price | currency: "$ "}}</td>
-          <td class="cart-qty">{{od.product.qty}}</td>
-            <td>{{od.product.qty * od.product.price | currency: "$ "}}</td>
+            <td> {{od.product.price/100 | currency: "$ "}}</td>
+          <td class="cart-qty">{{od.quantity}}</td>
+            <td>{{od.quantity * od.product.price/100 | currency: "$ "}}</td>
           </tr>
           <tr>
             <td colspan="4"></td>
@@ -126,7 +126,7 @@
             <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
             <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>
             <br>
-            <span class='pull-right text-muted'>{{o.totalPrice | currency: '$ '}}</span>
+            <span class='pull-right text-muted'>{{o.totalPrice/100 | currency: '$ '}}</span>
             <span class='text-muted pull-left'>Status: {{o.status}}</span>
             <br>
         </ul>
@@ -159,9 +159,9 @@
           <tr ng-repeat="od in orderDetails._products">
           <td class="cart-img"><img class="product-image-thumb" src="{{od.product.image}}"></td>
             <td>{{od.product.description}}</td>
-            <td> {{od.product.price | currency: "$ "}}</td>
-          <td class="cart-qty">{{od.product.qty}}</td>
-            <td>{{od.product.qty * od.product.price | currency: "$ "}}</td>
+            <td> {{od.product.price/100 | currency: "$ "}}</td>
+          <td class="cart-qty">{{od.quantity}}</td>
+            <td>{{od.quantity * od.product.price/100 | currency: "$ "}}</td>
           </tr>
           <tr>
             <td colspan="4"></td>
@@ -185,7 +185,7 @@
             <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
             <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>
             <br>
-            <span class='pull-right text-muted'>{{o.totalPrice | currency: '$ '}}</span>
+            <span class='pull-right text-muted'>{{o.totalPrice/100 | currency: '$ '}}</span>
             <span class='text-muted pull-left'>Status: {{o.status}}</span>
             <br>
         </ul>
@@ -218,9 +218,9 @@
           <tr ng-repeat="od in orderDetails._products">
           <td class="cart-img"><img class="product-image-thumb" src="{{od.product.image}}"></td>
             <td>{{od.product.description}}</td>
-            <td> {{od.product.price | currency: "$ "}}</td>
-          <td class="cart-qty">{{od.product.qty}}</td>
-            <td>{{od.product.qty * od.product.price | currency: "$ "}}</td>
+            <td> {{od.product.price/100 | currency: "$ "}}</td>
+          <td class="cart-qty">{{od.quantity}}</td>
+            <td>{{od.quantity * od.product.price/100 | currency: "$ "}}</td>
           </tr>
           <tr>
             <td colspan="4"></td>
@@ -243,7 +243,7 @@
             <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
             <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>
             <br>
-            <span class='pull-right text-muted'>{{o.totalPrice | currency: '$ '}}</span>
+            <span class='pull-right text-muted'>{{o.totalPrice/100 | currency: '$ '}}</span>
             <span class='text-muted pull-left'>Status: {{o.status}}</span>
             <br>
         </ul>
@@ -276,9 +276,9 @@
           <tr ng-repeat="od in orderDetails._products">
           <td class="cart-img"><img class="product-image-thumb" src="{{od.product.image}}"></td>
             <td>{{od.product.description}}</td>
-            <td> {{od.product.price | currency: "$ "}}</td>
-          <td class="cart-qty">{{od.product.qty}}</td>
-            <td>{{od.product.qty * od.product.price | currency: "$ "}}</td>
+            <td> {{od.product.price/100 | currency: "$ "}}</td>
+          <td class="cart-qty">{{od.quantity}}</td>
+            <td>{{od.quantity * od.product.price/100 | currency: "$ "}}</td>
           </tr>
           <tr>
             <td colspan="4"></td>
