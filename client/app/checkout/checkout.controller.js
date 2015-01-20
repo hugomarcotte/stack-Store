@@ -1,36 +1,34 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('CheckoutCtrl', function ($scope, $cookieStore, Order, Auth,CartCookies,Cart) {
+  .controller('CheckoutCtrl', function ($scope, $cookieStore, $http, Order, Auth, CartCookies, Cart, Product) {
     
+
     $scope.findOrder = function(){
         var cartId = $cookieStore.get('cart');
-        Cart.get({id:cartId},function(result){
-            $scope.order = result;
-            $scope.validOrder = true;
-            ///Error handler?
-        })
-    }
+        $http.get('/api/carts/'+cartId+'/cartView')
+            .success(function(data){
+                $scope.order = data;
+                $scope.validOrder = true;
+                $scope.totalPrice = 0;
+                $scope.order.products.forEach(function(item){
+                    $scope.totalPrice += (item.productId.price * item.qty);
+                 })
+            })
+    };
     $scope.findOrder();
 
-    $scope.totalPriceCalculator = function(){
-    	$scope.totalPrice = 0
-    	$scope.order.forEach(function(item){
-    		$scope.totalPrice += (item.product.price * item.qty);
-    	})
-    	return $scope.totalPrice;
-    }
-    $scope.placeOrder = function(order, stripeId){
+    $scope.placeOrder = function(order, stripeResponse){
     	var randomId = function(){
             return Math.floor((1 + Math.random()) * 0x10000)
                            .toString(16)
                            .substring(1);
         }
         var products = [];
-    	order.forEach(function(item){
+    	order.products.forEach(function(item){
     		products.push({
-    		id: item.product._id,
-    		price: item.product.price,
+    		id: item.productId._id,
+    		price: item.productId.price,
     		quantity: item.qty
     		})
     	})
@@ -48,14 +46,15 @@ angular.module('stackStoreApp')
              guest_user: guestUser||null,
     		 creationDate:date, 
     		 totalPrice: totalPrice,
-             stripeId: stripeId
+             stripeInfo: stripeResponse
             },function(){ 
     		 	//Should probably have something
     		 	//diplaying success confirmation for user
     		 	$cookieStore.remove('cart');
     		});
     }
-    //// test card number is 4242424242424242, enter other info too
+
+    // //// test card number is 4242424242424242, enter other info too
     $scope.submitPayment = function(stripe_number, stripe_cvc, exp_month, exp_year){
         $scope.payed = true
         Stripe.card.createToken({
@@ -64,7 +63,7 @@ angular.module('stackStoreApp')
             exp_month: exp_month,
             exp_year: exp_year
         }, function(status, response){
-            $scope.placeOrder($scope.order, response.id)
+            $scope.placeOrder($scope.order, response)
         })
     }
   });
