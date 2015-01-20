@@ -3,10 +3,11 @@
   <ul>
     <li ng-repeat="page in stats">
       <div>
-        Page:{{page.page}}
+        Date: {{page.date.toDateString()}}
+        <br>Page:{{page.page}}
+        <hr>
       </div>
       <div>
-        Hits: {{page.hits}}
       </div>
     </li>
   </ul>

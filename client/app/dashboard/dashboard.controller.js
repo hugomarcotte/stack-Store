@@ -10,6 +10,7 @@ angular.module('stackStoreApp')
     Analytic.query(function(results) {
       results.forEach(function(obj){
         obj.date = new Date(obj.date) //silly mongo
+        console.log(obj)
       })
       
       $scope.stats = results;
@@ -17,7 +18,8 @@ angular.module('stackStoreApp')
 
     });
 
-    $scope.sortByDate = function(date){
+    $scope.sortByDate = function(){
+      var groups = [];
       
     }
 
