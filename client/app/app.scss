@@ -15,6 +15,31 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     padding: 0.2em 0;
 }
 
+.cart-img {
+	width: 10%;
+}
+
+.cart-qty {
+	width: 10%;
+}
+
+.cart-qty input{
+	width: 75%;
+}
+
+.cartCheckout {
+	width: 100%;
+	td {
+		border-top: 1px solid #C8C8C8;
+		text-align: center;
+		width: 18%;
+	}
+}
+
+.cart-container {
+	text-align: center;
+}
+
 .center-items {
 	text-align: center;
 }
@@ -31,6 +56,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 	width: 200px;
 	height: 200px;
 	margin: 5px 0px;
+}
+
+.order-item {
+	width: 100%;
 }
 
 .category-section {
@@ -52,8 +81,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 @import 'cart/cart.scss';
 @import 'checkout/checkout.scss';
 @import 'main/main.scss';
+@import 'orderView/orderView.scss';
 @import 'product/product.scss';
 @import 'updateProduct/updateProduct.scss';
+@import 'userAccount/userAccount.scss';
 @import 'writeReview/writeReview.scss';
 @import 'modal/modal.scss';
 // endinjector

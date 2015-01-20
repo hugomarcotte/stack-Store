@@ -3,10 +3,12 @@
 angular.module('stackStoreApp')
   .controller('CartCtrl', function ($scope, Cart, CartCookies,$cookieStore) {
     var cartId = $cookieStore.get('cart');
+    $scope.currentCart = {};
     
     Cart.cartPage({id:cartId},function(results){
       $scope.cart = results.products;
     });
+
     $scope.isSaved = false;
 
     // $scope.cartIsEmpty = $scope.cart.length == 0;
@@ -19,8 +21,17 @@ angular.module('stackStoreApp')
       })
     };
 
-    $scope.cartUpdate = function() {
-    	Cart.updateCart($scope.cart);
+    $scope.cartUpdate = function(cart) {
+      var currentCart = []
+      cart.forEach(function(item) {
+        currentCart.push({
+          productId: item.productId._id,
+          _id: item._id,
+          qty: item.qty
+        })
+      });
+
+    	Cart.updateCart({id: cartId}, {products: currentCart});
     	$scope.isSaved = true;
     };
 

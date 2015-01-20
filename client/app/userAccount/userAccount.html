@@ -1,0 +1,51 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1">
+	<h1>My Account</h1>
+	<h5>Email: {{email.email}}</h5>
+	<h3>View Order History</h3>
+
+	<div ng-show="orders.length">
+        <ul class="list-group">
+          <button type="button" class="list-group-item order-item" ng-repeat="o in orders" ng-click="$parent.viewOrder=!viewOrder; $parent.orderDetails=o">
+            <strong class="pull-left">{{o._id}}</strong>
+            <br>
+            <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
+            <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>
+            <br>
+            <span class='pull-right text-muted'>{{o.totalPrice/100 | currency: '$ '}}</span>
+            <span class='text-muted pull-left'>Status: {{o.status}}</span>
+            <br>
+            <div ng-show="viewOrder && orderDetails===o">
+		        <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
+		          <tr>
+		            <h4>Order #: {{orderDetails._id}}</h4>
+		            <div class="dropdown">
+		              <h5>Status: {{orderDetails.status}}</h5>
+		          </tr>
+		          <tr>
+		          <td></td>
+		            <td>Item</td>
+		            <td>Price</td>
+		            <td>Quantity</td>
+		            <td>Cost</td>
+		          </tr>
+		          <tr ng-repeat="od in orderDetails._products">
+		          <td class="cart-img"><img class="product-image-thumb" src="{{od.product.image}}"></td>
+		            <td>{{od.product.name}}</td>
+		            <td> {{od.product.price/100 | currency: "$ "}}</td>
+		          <td class="cart-qty">{{od.quantity}}</td>
+		            <td>{{od.quantity * od.product.price/100 | currency: "$ "}}</td>
+		          </tr>
+		          <tr>
+		            <td colspan="4"></td>
+		            <td><b>{{}}</b></td>
+		          </tr>       
+		        </table>
+		    </div>
+        </ul>
+
+    </div>
+
+    
+</div>

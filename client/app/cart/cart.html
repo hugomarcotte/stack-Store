@@ -8,7 +8,7 @@
 		</div>
 		<h1 ng-show="cart.length">My Cart</h1>
 	</div>
-	<form name="cart" ng-submit='cartUpdate()'>
+	<form name="cart" ng-submit='cartUpdate(cart)'>
 	<div class="panel panel-default" ng-show="cart.length">
 	  <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
 	  	<tr>
@@ -48,7 +48,7 @@
 	<div class="button-group" ng-show="cart.length">
   		<button type="submit" class="btn btn-primary">Save</button>
   		<a href="/checkout"><button type="button" class="btn btn-danger">Checkout</button></a>
-  		<a href="/"><button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping!</button></a>
+  		<a href="/"><button type="button" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping!</button></a>
 	</div>
 	</form>
 </div>

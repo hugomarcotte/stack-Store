@@ -10,6 +10,7 @@ var OrderSchema = new Schema({
   _products: [],
   // cart: {type:Schema.Types.ObjectId,ref: 'Cart'},  //Need cartIds for .populate
   creationDate: {type:Date, default: Date.now() },
+  status: {type: String, default: 'Open'},
   totalPrice: Number,
   stripeInfo: Object
 });

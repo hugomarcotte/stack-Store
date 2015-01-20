@@ -1,5 +1,6 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="container">
+  
   <tabset>
     <tab heading="Users">
       <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
@@ -84,7 +85,7 @@
       </div>
     </tab>
     <tab heading="Orders">
-      Orders
+      <order-view></order-view>
     </tab>
   </tabset>
 </div>

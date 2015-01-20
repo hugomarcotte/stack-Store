@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('CheckoutCtrl', function ($scope, $cookieStore, $http, Order, Auth, CartCookies, Cart, Product) {
+  .controller('CheckoutCtrl', function ($scope, $cookieStore, $http, Order, Auth, CartCookies, Cart, Product, $location) {
     
 
     $scope.findOrder = function(){
@@ -26,7 +26,9 @@ angular.module('stackStoreApp')
         }
         var products = [];
     	order.products.forEach(function(item){
+            console.log(item);
     		products.push({
+            product: item.productId,
     		id: item.productId._id,
     		price: item.productId.price,
     		quantity: item.qty
@@ -44,7 +46,7 @@ angular.module('stackStoreApp')
     	Order.save({_products:products,
     		 _user:user||null,
              guest_user: guestUser||null,
-    		 creationDate:date, 
+    		 creationDate:date,
     		 totalPrice: totalPrice,
              stripeInfo: stripeResponse
             },function(){ 
@@ -55,15 +57,20 @@ angular.module('stackStoreApp')
     }
 
     // //// test card number is 4242424242424242, enter other info too
-    $scope.submitPayment = function(stripe_number, stripe_cvc, exp_month, exp_year){
-        $scope.payed = true
+    $scope.submitPayment = function(stripe_number, stripe_cvc, exp_month, exp_year){  
         Stripe.card.createToken({
             number: stripe_number,
             cvc: stripe_cvc,
             exp_month: exp_month,
             exp_year: exp_year
         }, function(status, response){
-            $scope.placeOrder($scope.order, response)
+            if(status == 200) {
+                $scope.placeOrder($scope.order, response);
+                $location.path('/');
+                $scope.payed = true
+            } else {
+                alert('Invalid Credit Card Information!');
+            }
         })
     }
   });
