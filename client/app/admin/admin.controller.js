@@ -6,8 +6,11 @@ angular.module('stackStoreApp')
     // Use the User $resource to fetch all users
     $scope.users = User.query();
     $scope.newProduct = {category: []};
+    $scope.orderDetails = {};
     $scope.addProduct = false;
     $scope.updateProduct = false;
+    $scope.updateOrder = false;
+    $scope.viewOrder = false;
 
     $scope.createNewProduct = function(product){
       Product.save(product);
@@ -48,7 +51,7 @@ angular.module('stackStoreApp')
       User.userUpdate( {id:user._id} ,user,function(){
         console.log(user)
         $scope.users = User.query()
-        },function(err){
+        }, function(err){
           console.log('Error: ',err)
         }
       )
@@ -62,6 +65,7 @@ angular.module('stackStoreApp')
         }
       });
     };
+
     $scope.addCategory = function() {
       if($scope.selectedCategory) {
         if($scope.newProduct.category.indexOf($scope.selectedCategory) === -1) {
@@ -78,7 +82,13 @@ angular.module('stackStoreApp')
     $scope.populateOrders = function() {
       $scope.orderHistory = Order.query();
     }
-
     $scope.populateOrders();
 
+    $scope.sumQty = function(array) {
+      var total = 0;
+      array.forEach(function(product) {
+        total += product.quantity;
+      })
+      return total;
+    }
   })

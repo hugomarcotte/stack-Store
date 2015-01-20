@@ -26,7 +26,9 @@ angular.module('stackStoreApp')
         }
         var products = [];
     	order.products.forEach(function(item){
+            console.log(item);
     		products.push({
+            product: item.productId,
     		id: item.productId._id,
     		price: item.productId.price,
     		quantity: item.qty

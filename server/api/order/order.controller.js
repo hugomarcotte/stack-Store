@@ -14,7 +14,6 @@ var Order = require('./order.model');
 exports.index = function(req, res) {
   Order
     .find()
-    .populate('_user')
     .exec(function(err, orders) {
       if(err) { return handleError(res, err); }
       return res.json(200, orders);

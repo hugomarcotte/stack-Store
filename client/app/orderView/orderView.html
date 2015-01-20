@@ -1,2 +1,49 @@
-<div>this is the orderView directive</div>
-{{orderHistory}}
+<div ng-hide="updateOrder">
+  <h3>Order Log</h3>
+    <ul class="list-group">
+      <button type="button" class="list-group-item order-item" ng-repeat="o in orderHistory" ng-click="$parent.updateOrder=true; $parent.viewOrder=true; $parent.orderDetails=o._products; $parent.orderNumber=o._id">
+        <strong class="pull-left">{{o._id}}</strong>
+        <br>
+        <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
+        <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>
+        <br>
+        <span class='pull-right text-muted'>{{o.totalPrice | currency: '$ '}}</span>
+        <span class='text-muted pull-left'>Status: {{o.status}}</span>
+      </button>
+    </ul>
+</div>
+
+<div ng-show="viewOrder">
+    <table id="table-style" data-row-style="rowStyle" class="cartCheckout"> 
+      <tr>
+        <h4>Order #: {{orderNumber}}</h4>
+      </tr>
+      <tr>
+      <td></td>
+        <td>Item</td>
+        <td>Price</td>
+        <td>Quantity</td>
+        <td>Cost</td>
+        <td>Remove</td>
+      </tr>
+      <tr ng-repeat="od in orderDetails">
+      <td class="cart-img"><img class="product-image-thumb" src="{{od.product.image}}"></td>
+        <td>{{od.product.description}}</td>
+        <td> {{od.product.price | currency: "$ "}}</td>
+      <td class="cart-qty"><input type="number" class="form-control pull-right" min="1" ng-model="od.product.qty" ng-change="$parent.isSaved=false"></td>
+        <td>{{od.product.qty * od.product.price | currency: "$ "}}</td>
+        <td><span style="cursor: pointer;" class="glyphicon glyphicon-remove" ng-click="removeItem(product.productId._id)"></span> </td>
+      </tr>
+      <tr>
+        <td colspan="4"></td>
+        <td><b>{{}}</b></td>
+        <td colspan="2"></td>
+      </tr>       
+    </table>
+    <div class="btn-group col-sm-12">
+      <button type="button" class="btn btn-primary pull-right" ng-click="updateOrder=false; viewOrder=false">Update
+      </button>
+      <button type="button" class="btn btn-danger pull-right" ng-click="updateOrder=false; viewOrder=false">Cancel
+      </button>
+    </div>
+</div>
