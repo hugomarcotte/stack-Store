@@ -27,35 +27,33 @@ Product.find({}).remove(function() {
     qty: 12,
      image: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"
   }, {
-    name: 'product 3',
-    price: 1999,
-    description: 'Great product',
+    name: 'Keurig',
+    price: 39999,
+    description: 'Coding fuel',
+    category: ['Misc'],
     qty: 12,
-    image: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"
+    image: "https://www.filepicker.io/api/file/Co0e17KOQ5y8Uhi8WZJj"
   },{
-    name: 'Contraband',
-    price: 99999999,
-    description: "You didn't buy this here",
+    name: 'Cereal Dispensers',
+    price: 999,
+    description: "Mini-Wheats not included",
+    category: ['Misc'],
     qty: 9,
-    image: "http://milwaukee.brewers.mlb.com/mil/images/ballpark/y2012/im_noweapons_180x180.png"
+    image: "https://www.filepicker.io/api/file/qufy3Z30RkeEJpZ6PBTk"
   },{
     name: 'Headphones',
-    price: 99999,
-    description: "The price is totally reasonable",
+    price: 9999,
+    description: "Pretty self-explanatory",
+    category: ['Electronics'],
     qty: 12,
-    image: "http://underwrapsfitness.com.au/wp-content/uploads/2013/10/NEwProductComingSoon.jpg"
+    image: "https://images.lsonetwork.com/original/beatsheadphones-250x250.jpg"
   },{
-    name: 'Dogs',
+    name: 'Fullstack Mascot',
     price: 1000,
-    description: 'How is this legal?',
+    description: 'Super comfortable',
+    category: ['Misc'],
     qty: 12,
-    image: "http://www.prevention.com/sites/default/files/imagecache/slideshow_display/dog-dogue-de-bordeaux-puppy-410x290.jpg"
-  },{
-    name: 'Coffee',
-    price: 199,
-    description: 'Legal Drugs',
-    qty: 12,
-    image: "http://a.dryicons.com/images/icon_sets/travel_and_tourism_part_2/png/256x256/coffee.png"
+    image: "https://www.filepicker.io/api/file/LL7FbQOUSqSKKb4ORdS4"
   });
 });
 
