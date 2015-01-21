@@ -14,7 +14,7 @@
 	flex-direction: column;
 	position: absolute;
 	top: 25px;
-	padding-right: 40%;
+	width: 75%
 }
 
 .product-btn {
@@ -23,4 +23,9 @@
 
 .review-container {
 	padding-right: 20%;
+}
+
+.header-product{
+	text-align: center;
+	margin-bottom: 25px;
 }
