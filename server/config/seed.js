@@ -218,6 +218,9 @@ Analytic.find({}).remove(function(){
     {
       page : {"productPage" : (Math.random()*100).toFixed(0), "mainPage" : (Math.random()*100).toFixed(0)},
       date : new Date('Tue Jan 19 2015')
+    },{
+      page : {"productPage" : (Math.random()*100).toFixed(0), "mainPage" : (Math.random()*100).toFixed(0)},
+      date : new Date('Tue Jan 20 2015')
     },
     function(){
       console.log('Populated Analytic')
