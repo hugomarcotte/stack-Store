@@ -1,0 +1,16 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="col-md-12 col-lg-12 col-sm-12">
+	<h1>Promotions</h1>
+	<h5>Enter one of the codes below at checkout to use the promotion.</h5>
+	<div>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="promo in promotions |  filter:{active:true}">
+            <span>
+              <strong>Promo code: {{promo.code}}</strong>
+              <strong>Deal: {{promo.percentOff}}% off</strong>
+              <strong>Valid from: {{promo.startDate | date}}<strong>
+              <strong>Valid until: {{promo.endDate | date}}<strong>
+          </li>
+        </ul>
+    </div>
+</div>

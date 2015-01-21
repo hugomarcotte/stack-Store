@@ -12,7 +12,8 @@ var OrderSchema = new Schema({
   creationDate: {type:Date, default: Date.now() },
   status: {type: String, default: 'Open'},
   totalPrice: Number,
-  stripeInfo: Object
+  stripeInfo: Object,
+  promo: String
 });
 
 OrderSchema.pre('save', function(next){
