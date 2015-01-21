@@ -11,20 +11,20 @@
 			<div class="panel-heading">
 				<h4>Product Description</h4>
 			</div>
-			<div class="product-description panel-info">
+			<div class="product-description panel-info fakeclass">
 				<h5>{{product.description}}</h5>
 			</div>
-			<h5>Stock: {{product.qty}}</h5>
-			<h5>Price: $ {{product.price}}</h5>
+			<h5 class='fakeclass' >Stock: {{product.qty}}</h5>
+			<h5 class='fakeclass'>Price: $ {{product.price}}</h5>
 			<form name="products" ng-submit="addToCart(product._id,productQuantity)">
-				<label style="display:inline-block; text-align:right;">Quantity: </label>
+				<label class='fakeclass' style="display:inline-block; text-align:right;">Quantity: </label>
 				<input style="display: inline-block" ng-model="productQuantity" ng-init="productQuantity=1" type="number" name="quantity" min="1">
 				<div class="button-group" style="margin-top: 10px;">
-					<button class="btn btn-primary product-btn"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
+					<button class="btn btn-primary product-btn fakeclass"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
 				</div>
 			</form>
 			<div>
-				<button type='button' class='btn btn-warning product-btn' ng-show="checkLogIn() &&!writeReview" ng-click="writeReview = true">Write a Review</button>
+				<button type='button' class='btn btn-warning product-btn fakeclass' ng-show="checkLogIn() &&!writeReview" ng-click="writeReview = true">Write a Review</button>
 				<write-review ng-show="writeReview"></write-review>
 			</div>
 		</div>
