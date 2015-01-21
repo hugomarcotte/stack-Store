@@ -1,10 +1,10 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="row">
-	<div class="detail-left col-lg-6 col-md-6 col-sm-6">
+	<div class="detail-left col-lg-6 col-md-10 col-sm-10">
 		<h1>{{product.name}}</h1>
 		<img src="{{product.image}}">
 	</div>
-	<div class="col-lg-6 col-md-6 col-sm-6">
+	<div class="col-lg-6 col-md-10 col-sm-10">
 		<div style="display " class="product-container">
 			<h4>Product Description</h4>
 			<div class="product-description">
@@ -28,7 +28,7 @@
 </div>
 
 <div class='row' ng-show="reviews.length">
-	<div class='col-lg-10 col-lg-offset-2 review-container'><h4>Reviews</h4>
+	<div class='col-lg-10 col-md-10 colsm-10 col-lg-offset-2 review-container'><h4>Reviews</h4>
 		<ul class="list-group">
 			<li  class="list-group-item" ng-repeat="review in reviews">
 				<span>
@@ -44,5 +44,5 @@
 	</div>
 </div>
 
-<img src="http://localhost:9187/pixel.gif?key=productPage" alt="" />
+<!-- <img src="http://localhost:9187/pixel.gif?key=productPage" alt="" /> -->
 
