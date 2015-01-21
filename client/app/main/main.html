@@ -1,11 +1,11 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>Slack Store</h1> <!-- I approve of this typo -->
-    <p class="lead">Buy wonderful products</p>
+    <h1 id='brighter'>Fullstack Store</h1>
+    <p class="lead" id='brighter'>Buy things we stole from Fullstack!</p>
   </div>
   <form class="navbar-form" role="search" ng-submit="search(searchTerm)">
-    <div class="form-group">
+    <div class="form-group" id='brighter'>
           <span class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
               {{searchTerm.category || 'Categories'}}
