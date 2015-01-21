@@ -5,6 +5,7 @@
         <ul class="list-group">
           <button type="button" class="list-group-item order-item" ng-repeat="o in orderHistory" ng-click="$parent.updateOrder=true; $parent.viewOrder=true; $parent.orderDetails=o">
             <strong class="pull-left">{{o._id}}</strong>
+            <span class='text-muted pull-right'>Promotion Used: {{o.promo}}</span>
             <br>
             <span class='text-muted pull-right'> {{sumQty(o._products)}} items</span>
             <span class='text-muted pull-left'>{{o.creationDate | date:'MMM d, y'}}</span>

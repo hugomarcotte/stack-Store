@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stackStoreApp')
-  .controller('CheckoutCtrl', function ($scope, $cookieStore, $http, Order, Auth, CartCookies, Cart, Product, $location) {
+  .controller('CheckoutCtrl', function ($scope, $cookieStore, $http, Order, Auth, CartCookies, Cart, Product, $location, promotions) {
     
 
     $scope.findOrder = function(){
@@ -43,12 +43,14 @@ angular.module('stackStoreApp')
         }
     	var date = new Date();
     	var totalPrice = $scope.totalPrice;
+        var promo = $scope.promoTracker
     	Order.save({_products:products,
     		 _user:user||null,
              guest_user: guestUser||null,
     		 creationDate:date,
     		 totalPrice: totalPrice,
-             stripeInfo: stripeResponse
+             stripeInfo: stripeResponse,
+             promo: promo
             },function(){ 
     		 	//Should probably have something
     		 	//diplaying success confirmation for user
@@ -71,6 +73,15 @@ angular.module('stackStoreApp')
             } else {
                 alert('Invalid Credit Card Information!');
             }
+        })
+    }
+    $scope.applyPromo = function(promo){
+        promotions.get({id:promo}, function(data){
+            $scope.promoUsed = true;
+            $scope.promoTracker = data.code;
+            $scope.totalPrice = $scope.totalPrice*(1-data.percentOff/100) 
+        }, function(err){
+            alert("promo code not valid")
         })
     }
   });

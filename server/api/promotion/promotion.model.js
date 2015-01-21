@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 var PromotionSchema = new Schema({
   code: String,
   startDate: {type:Date, default: Date.now},
-  endDate: {type:Date, default: Date.now},
+  endDate: {type:Date, required: true},
   percentOff: Number,
   active: {type:Boolean, default: true}
 });
@@ -17,6 +17,10 @@ PromotionSchema.virtual('isActive').get(function() {
   }
   return false;
 });
+
+PromotionSchema.statics.findCode = function(code){
+  return this.findOne({code:code});
+}
 
 
 

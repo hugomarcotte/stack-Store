@@ -137,7 +137,7 @@ Promotion.find({}).remove(function(){
   Promotion.create(
     {code: 'promo10',
     startDate: Date.now(),
-    endDdate: new Date('Tue Jan 30 2015'),
+    endDate: new Date('Tue Jan 30 2015'),
     percentOff: 10,
     active: true
     },
@@ -146,7 +146,6 @@ Promotion.find({}).remove(function(){
     }
   )
 });
-
 
 Analytic.find({}).remove(function(){
   Analytic.create(
@@ -219,3 +218,4 @@ Analytic.find({}).remove(function(){
     }
   )
 });
+

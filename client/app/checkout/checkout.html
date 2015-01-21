@@ -80,6 +80,14 @@
 		  <button class="btn btn-primary" style="margin: 10px;" ng-disabled="payed">Submit Payment</button>
 		</form>
 		</div>
+		<div>
+			<h3>Enter promo code: </h3>
+			<form class="form-group" ng-submit="applyPromo(promo)">
+				<label>Enter Promotion Code: </label>
+				<input type="text" ng-model="promo">
+				<button ng-disabled="promoUsed" class="btn btn-primary">Apply Promo</button>
+			</form>
+		</div>
 	</div>
 </div>
 
