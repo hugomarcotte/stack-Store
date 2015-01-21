@@ -5,12 +5,19 @@
 #banner {
     border-bottom: none;
     margin-top: -20px;
+    background: url("http://cdn1.lockerdome.com/uploads/0883fb38d80eef61f803fd46f9d1991a08789c4daacf43b3580ad2626340609e_large") top center fixed;
+    opacity: .8;
+    background-repeat: no-repeat;
+    width: 100%;
 }
+
+
 
 #banner h1 {
     font-size: 60px;
     line-height: 1;
     letter-spacing: -1px;
+    opacity: 1
 }
 
 .hero-unit {
@@ -34,4 +41,10 @@
 
 .product-grid{
     margin-top: 30px;
+}
+
+#brighter{
+    opacity: 1 !important;
+    text-shadow: 3px 3px rgba(0, 0, 0, 0.8);
+    z-index: 500;
 }
