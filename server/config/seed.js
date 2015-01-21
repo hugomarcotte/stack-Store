@@ -141,6 +141,12 @@ Promotion.find({}).remove(function(){
     percentOff: 10,
     active: true
     },
+    {code: 'promo20',
+    startDate: Date.now(),
+    endDate: new Date('Tue Jan 25 2015'),
+    percentOff: 20,
+    active: true
+    },
     function(){
       console.log('Populated Promotions')
     }
