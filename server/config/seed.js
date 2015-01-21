@@ -54,6 +54,14 @@ Product.find({}).remove(function() {
     category: ['Misc'],
     qty: 12,
     image: "https://www.filepicker.io/api/file/LL7FbQOUSqSKKb4ORdS4"
+  },
+  {
+    name: 'Bluetooth Amp',
+    price: 100000,
+    description: 'No one has used it for karaoke yet',
+    category: ['Electronics'],
+    qty: 12,
+    image: "https://www.filepicker.io/api/file/QT1QjzmvQBKOh3oVs9jb"
   });
 });
 
